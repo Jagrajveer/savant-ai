@@ -41,18 +41,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Media */}
-        <div className="flex items-center space-x-6 mb-8">
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">
-            <span className="sr-only">LinkedIn</span>
-            <div className="w-6 h-6 bg-gray-600 rounded"></div>
-          </a>
-          <a href="#" className="text-gray-400 hover:text-white transition-colors">
-            <span className="sr-only">Twitter</span>
-            <div className="w-6 h-6 bg-gray-600 rounded"></div>
-          </a>
-        </div>
-
         {/* Bottom CTA */}
         <div className="border-t border-gray-800 pt-8">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center">
