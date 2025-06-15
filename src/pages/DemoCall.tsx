@@ -44,7 +44,22 @@ const DemoCall = () => {
           </Link>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Left Side - Information */}
+            {/* Left Side - Calendly Embed */}
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 animate-fade-in-up delay-800 hover:shadow-2xl transition-all duration-300 border border-slate-700/50">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-4">Select a Day</h3>
+                <p className="text-gray-300">Choose a time that works best for you</p>
+              </div>
+              
+              {/* Calendly Embed */}
+              <div 
+                className="calendly-inline-widget" 
+                data-url="https://calendly.com/jagrajveer9/30min"
+                style={{ minWidth: '320px', height: '630px' }}
+              ></div>
+            </div>
+
+            {/* Right Side - Information */}
             <div className="animate-fade-in-up delay-200">
               {/* Badge */}
               <div className="inline-flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm text-blue-400 px-4 py-2 rounded-full mb-8 animate-scale-in delay-300 border border-slate-700/50">
@@ -108,21 +123,6 @@ const DemoCall = () => {
                 </blockquote>
                 <div className="text-slate-400">— Service Business Owner</div>
               </div>
-            </div>
-
-            {/* Right Side - Calendly Embed */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 animate-fade-in-up delay-800 hover:shadow-2xl transition-all duration-300 border border-slate-700/50">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Select a Day</h3>
-                <p className="text-gray-300">Choose a time that works best for you</p>
-              </div>
-              
-              {/* Calendly Embed */}
-              <div 
-                className="calendly-inline-widget" 
-                data-url="https://calendly.com/jagrajveer9/30min"
-                style={{ minWidth: '320px', height: '630px' }}
-              ></div>
             </div>
           </div>
         </div>
