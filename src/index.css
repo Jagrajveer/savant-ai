@@ -91,7 +91,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border transition-colors duration-300;
   }
 
   body {
@@ -103,8 +103,105 @@
   }
 }
 
-/* Custom animations */
+/* AI and Tech Background Animations */
 @layer utilities {
+  @keyframes neural-network {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translate3d(10px, -10px, 0) rotate(90deg);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate3d(-5px, 5px, 0) rotate(180deg);
+      opacity: 0.4;
+    }
+    75% {
+      transform: translate3d(-10px, -5px, 0) rotate(270deg);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes data-flow {
+    0% {
+      transform: translateX(-100%) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(0%) scale(1);
+    }
+    100% {
+      transform: translateX(100%) scale(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes circuit-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.4);
+      border-color: rgba(59, 130, 246, 0.8);
+    }
+  }
+
+  @keyframes ai-orbit {
+    0% {
+      transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+  }
+
+  @keyframes matrix-rain {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Card Animations */
+  @keyframes bounce-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translateY(-10px) scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes card-hover-bounce {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-5px) scale(1.02);
+    }
+  }
+
+  /* Existing animations enhanced */
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -176,6 +273,7 @@
     }
   }
 
+  /* Animation Classes */
   .animate-fade-in {
     animation: fade-in 0.6s ease-out forwards;
   }
@@ -203,6 +301,36 @@
 
   .animate-glow {
     animation: glow 2s ease-in-out infinite;
+  }
+
+  /* New AI/Tech Animation Classes */
+  .animate-neural-network {
+    animation: neural-network 4s ease-in-out infinite;
+  }
+
+  .animate-data-flow {
+    animation: data-flow 3s ease-in-out infinite;
+  }
+
+  .animate-circuit-pulse {
+    animation: circuit-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-ai-orbit {
+    animation: ai-orbit 20s linear infinite;
+  }
+
+  .animate-matrix-rain {
+    animation: matrix-rain 4s linear infinite;
+  }
+
+  /* Card Animation Classes */
+  .animate-bounce-fade-in {
+    animation: bounce-fade-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  .card-hover-bounce:hover {
+    animation: card-hover-bounce 0.6s ease-in-out;
   }
 
   /* Delay classes */
@@ -239,11 +367,33 @@
     transform: translateY(0);
   }
 
-  /* Glass effect */
+  /* Enhanced Glass effect */
   .glass {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .glass:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* AI Background Elements */
+  .ai-bg-element {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+    filter: blur(1px);
+  }
+
+  .tech-grid {
+    background-image: 
+      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: data-flow 10s linear infinite;
   }
 
   /* Gradient text */
@@ -252,6 +402,24 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Global transition for all elements */
+  * {
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Enhanced button transitions */
+  button, .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  button:hover, .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  button:active, .btn:active {
+    transform: translateY(0);
   }
 }
 

@@ -35,8 +35,16 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section id="features" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
+      {/* Background AI Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-32 h-32 border border-blue-500/10 rounded-full animate-circuit-pulse delay-0"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 border border-purple-500/10 rounded-full animate-circuit-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-cyan-400/30 rounded-full animate-neural-network"></div>
+        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-blue-400/30 rounded-full animate-neural-network delay-500"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -52,10 +60,10 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="glass rounded-2xl p-8 hover:shadow-xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 animate-fade-in-up group border border-gray-700"
+              className="glass rounded-2xl p-8 hover:shadow-xl transition-all duration-500 animate-bounce-fade-in group border border-gray-700 card-hover-bounce"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+              <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 animate-circuit-pulse`}>
                 <feature.icon className="w-8 h-8 text-white" />
               </div>
               
@@ -69,7 +77,7 @@ const FeaturesSection = () => {
                     className="flex items-center space-x-2 group-hover:translate-x-1 transition-all duration-300"
                     style={{ transitionDelay: `${capIndex * 50}ms` }}
                   >
-                    <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                    <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 transition-transform duration-300 animate-pulse"></div>
                     <span className="text-sm text-gray-400">{capability}</span>
                   </div>
                 ))}
