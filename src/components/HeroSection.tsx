@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Zap } from 'lucide-react';
+import { Zap, CheckCircle, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
@@ -34,7 +34,8 @@ const HeroSection = () => {
 
         {/* Social Proof Badge */}
         <div className="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full mb-12 animate-fade-in-up delay-500 hover:scale-105 transition-all duration-300">
-          <span className="text-sm">📈 Built for growing businesses — over 80% of automation projects are ready in under 14 days</span>
+          <BarChart3 className="w-4 h-4" />
+          <span className="text-sm">Built for growing businesses — over 80% of automation projects are ready in under 14 days</span>
         </div>
 
         {/* What You'll Get */}
@@ -43,19 +44,19 @@ const HeroSection = () => {
           <div className="space-y-4 text-left">
             <div className="flex items-center space-x-3 group hover:translate-x-2 transition-all duration-300">
               <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <span className="text-emerald-600 text-sm">✓</span>
+                <CheckCircle className="w-4 h-4 text-emerald-600" />
               </div>
               <span className="text-gray-600">A 15-minute audit of your business workflows</span>
             </div>
             <div className="flex items-center space-x-3 group hover:translate-x-2 transition-all duration-300 delay-100">
               <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <span className="text-emerald-600 text-sm">✓</span>
+                <CheckCircle className="w-4 h-4 text-emerald-600" />
               </div>
               <span className="text-gray-600">A custom AI automation roadmap</span>
             </div>
             <div className="flex items-center space-x-3 group hover:translate-x-2 transition-all duration-300 delay-200">
               <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <span className="text-emerald-600 text-sm">✓</span>
+                <CheckCircle className="w-4 h-4 text-emerald-600" />
               </div>
               <span className="text-gray-600">Answers to your top questions — no tech skills needed</span>
             </div>
@@ -66,14 +67,14 @@ const HeroSection = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up delay-800">
           <Link
             to="/demo-call"
-            className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center space-x-2 hover:scale-105 hover:shadow-lg transform active:scale-95"
+            className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center space-x-2 hover:scale-105 hover:shadow-lg transform active:scale-95 group"
           >
-            <span>📅</span>
+            <Calendar className="w-5 h-5" />
             <span>Book a Free AI Strategy Call</span>
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </Link>
           <button className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-all duration-300 hover:scale-105 group">
-            <span>▶️</span>
+            <Play className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             <span>Watch a Demo</span>
           </button>
         </div>

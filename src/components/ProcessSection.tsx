@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MessageCircle, Settings, Rocket } from 'lucide-react';
 
 const ProcessSection = () => {
   return (
@@ -21,7 +22,7 @@ const ProcessSection = () => {
           <div className="text-center animate-fade-in-up delay-200 group hover:scale-105 transition-all duration-500">
             <div className="relative mb-8">
               <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300 animate-float">
-                <span className="text-white font-bold text-lg">💬</span>
+                <MessageCircle className="w-8 h-8 text-white" />
               </div>
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
                 <span className="text-white text-sm font-bold">1</span>
@@ -38,7 +39,7 @@ const ProcessSection = () => {
           <div className="text-center animate-fade-in-up delay-400 group hover:scale-105 transition-all duration-500">
             <div className="relative mb-8">
               <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300 animate-float" style={{ animationDelay: '1s' }}>
-                <span className="text-white font-bold text-lg">⚙️</span>
+                <Settings className="w-8 h-8 text-white" />
               </div>
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
                 <span className="text-white text-sm font-bold">2</span>
@@ -55,7 +56,7 @@ const ProcessSection = () => {
           <div className="text-center animate-fade-in-up delay-600 group hover:scale-105 transition-all duration-500">
             <div className="relative mb-8">
               <div className="w-20 h-20 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-300 animate-float" style={{ animationDelay: '2s' }}>
-                <span className="text-white font-bold text-lg">🚀</span>
+                <Rocket className="w-8 h-8 text-white" />
               </div>
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
                 <span className="text-white text-sm font-bold">3</span>
@@ -72,7 +73,7 @@ const ProcessSection = () => {
         {/* Timeline Badge */}
         <div className="text-center animate-fade-in-up delay-800">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-700 px-6 py-3 rounded-full hover:scale-105 transition-all duration-300 hover:shadow-lg">
-            <span className="text-sm animate-pulse">⚡</span>
+            <Rocket className="w-4 h-4 animate-pulse" />
             <span className="font-semibold">Average Timeline: 7-14 Days to Launch</span>
           </div>
         </div>

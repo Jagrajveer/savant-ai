@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mic, Zap, BarChart, Puzzle } from 'lucide-react';
+import { Mic, Zap, BarChart3, Puzzle } from 'lucide-react';
 
 const FeaturesSection = () => {
   const features = [
@@ -19,7 +19,7 @@ const FeaturesSection = () => {
       gradient: "from-purple-500 to-pink-500"
     },
     {
-      icon: BarChart,
+      icon: BarChart3,
       title: "Analytics & Insights",
       description: "Turn complex data into decisions with easy-to-read AI-powered dashboards.",
       capabilities: ["Real-time metrics", "Smart insights", "Custom dashboards", "Performance tracking"],
