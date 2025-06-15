@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Zap, CheckCircle, Play } from 'lucide-react';
+import { Zap, CheckCircle, Play, BarChart3, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
