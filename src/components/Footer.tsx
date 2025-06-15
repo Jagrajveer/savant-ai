@@ -19,22 +19,6 @@ const Footer = () => {
             <p className="text-gray-400 mb-6 max-w-sm">
               Transform your business with intelligent automation. We help growing companies save time, reduce costs, and scale efficiently through custom AI solutions.
             </p>
-            
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-400">📧</span>
-                <span className="text-gray-300">hello@savantai.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-400">📞</span>
-                <span className="text-gray-300">+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-400">📍</span>
-                <span className="text-gray-300">San Francisco, CA</span>
-              </div>
-            </div>
           </div>
 
           {/* Product Links */}
