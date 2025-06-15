@@ -36,13 +36,13 @@ const FinalCTASection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-r from-slate-800 via-indigo-800 to-gray-800 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-gray-800 via-blue-800 to-purple-800 relative overflow-hidden">
       {/* Background Tech Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-3 h-3 bg-slate-400/20 rounded-full animate-neural-network-smooth"></div>
-        <div className="absolute bottom-20 right-20 w-4 h-4 bg-indigo-400/20 rounded-full animate-neural-network-smooth delay-1000"></div>
-        <div className="absolute top-1/2 left-10 w-24 h-24 border border-slate-500/10 rounded-full animate-circuit-pulse-smooth"></div>
-        <div className="absolute bottom-1/4 right-10 w-32 h-32 border border-indigo-500/10 rounded-full animate-circuit-pulse-smooth delay-1000"></div>
+        <div className="absolute top-20 left-20 w-3 h-3 bg-blue-400/20 rounded-full animate-neural-network-smooth"></div>
+        <div className="absolute bottom-20 right-20 w-4 h-4 bg-purple-400/20 rounded-full animate-neural-network-smooth delay-1000"></div>
+        <div className="absolute top-1/2 left-10 w-24 h-24 border border-blue-500/10 rounded-full animate-circuit-pulse-smooth"></div>
+        <div className="absolute bottom-1/4 right-10 w-32 h-32 border border-purple-500/10 rounded-full animate-circuit-pulse-smooth delay-1000"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -50,9 +50,9 @@ const FinalCTASection = () => {
         <ScrollReveal direction="up" delay={0}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Let's Build Your First AI Agent — <span className="bg-gradient-to-r from-slate-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-shift">Free</span>
+              Let's Build Your First AI Agent — <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">Free</span>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-200 mb-8 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto">
               You don't need to know how AI works — you just need to know it's working for you.
             </p>
             
@@ -77,7 +77,7 @@ const FinalCTASection = () => {
             </div>
             
             <ScrollReveal direction="up" delay={400}>
-              <p className="text-slate-300">✨ No code required. Just smart automation that works for you.</p>
+              <p className="text-gray-300">✨ No code required. Just smart automation that works for you.</p>
             </ScrollReveal>
           </div>
         </ScrollReveal>
@@ -88,9 +88,9 @@ const FinalCTASection = () => {
             {stats.map((stat, index) => (
               <AnimatedCard key={index} delay={600 + index * 100} bounceDelay={300}>
                 <div className="glass p-6 rounded-lg hover-lift transition-all duration-300 hover:scale-105 group border border-white/10 hover:border-white/20 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="text-3xl md:text-4xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300 relative z-10">{stat.value}</div>
-                  <div className="text-slate-300 group-hover:text-white transition-colors duration-300 relative z-10">{stat.label}</div>
+                  <div className="text-gray-300 group-hover:text-white transition-colors duration-300 relative z-10">{stat.label}</div>
                 </div>
               </AnimatedCard>
             ))}
@@ -105,12 +105,12 @@ const FinalCTASection = () => {
                 <div className="glass rounded-lg p-6 hover-lift transition-all duration-300 hover:scale-105 group border border-white/10 hover:border-white/20 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="flex items-center space-x-3 mb-4 relative z-10">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:animate-elastic-bounce transition-transform duration-300">
-                      <span className="text-white">{benefit.icon}</span>
+                    <div className="w-8 h-8 bg-blue-400/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:animate-elastic-bounce transition-transform duration-300 border border-blue-400/30">
+                      <span className="text-blue-400">{benefit.icon}</span>
                     </div>
-                    <span className="text-white font-semibold group-hover:text-slate-200 transition-colors duration-300">{benefit.title}</span>
+                    <span className="text-white font-semibold group-hover:text-blue-400 transition-colors duration-300">{benefit.title}</span>
                   </div>
-                  <p className="text-slate-300 group-hover:text-slate-200 transition-colors duration-300 relative z-10">{benefit.description}</p>
+                  <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 relative z-10">{benefit.description}</p>
                 </div>
               </AnimatedCard>
             ))}

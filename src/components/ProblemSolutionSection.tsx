@@ -8,10 +8,10 @@ const ProblemSolutionSection = () => {
     <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
       {/* Background Tech Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-500/20 to-transparent animate-data-flow-smooth"></div>
-        <div className="absolute bottom-1/4 right-0 w-full h-px bg-gradient-to-l from-transparent via-indigo-500/20 to-transparent animate-data-flow-smooth delay-1000"></div>
-        <div className="absolute top-10 right-20 w-4 h-4 bg-gray-400/30 rounded-full animate-neural-network-smooth"></div>
-        <div className="absolute bottom-10 left-20 w-3 h-3 bg-stone-400/30 rounded-full animate-neural-network-smooth delay-1000"></div>
+        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent animate-data-flow-smooth"></div>
+        <div className="absolute bottom-1/4 right-0 w-full h-px bg-gradient-to-l from-transparent via-purple-500/20 to-transparent animate-data-flow-smooth delay-1000"></div>
+        <div className="absolute top-10 right-20 w-4 h-4 bg-blue-400/30 rounded-full animate-neural-network-smooth"></div>
+        <div className="absolute bottom-10 left-20 w-3 h-3 bg-purple-400/30 rounded-full animate-neural-network-smooth delay-1000"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -19,7 +19,7 @@ const ProblemSolutionSection = () => {
         <ScrollReveal direction="up" delay={0}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Still doing things <span className="text-red-400 animate-gradient-shift">manually</span> that could be automated?
+              Still doing things <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">manually</span> that could be automated?
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto">
               Many growing businesses waste time and money on repetitive tasks, slow systems, and disconnected tools. 
@@ -82,13 +82,13 @@ const ProblemSolutionSection = () => {
           <ScrollReveal direction="right" delay={300}>
             <div className="group">
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-6 h-6 bg-stone-400/20 rounded-full flex items-center justify-center border border-stone-400/30 animate-circuit-pulse-smooth">
-                  <span className="text-stone-400 text-sm">✓</span>
+                <div className="w-6 h-6 bg-blue-400/20 rounded-full flex items-center justify-center border border-blue-400/30 animate-circuit-pulse-smooth">
+                  <span className="text-blue-400 text-sm">✓</span>
                 </div>
-                <span className="text-stone-400 font-semibold">Our Solution</span>
+                <span className="text-blue-400 font-semibold">Our Solution</span>
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-8 group-hover:text-stone-400 transition-colors duration-300">Smart Automation Made Simple</h3>
+              <h3 className="text-2xl font-bold text-white mb-8 group-hover:text-blue-400 transition-colors duration-300">Smart Automation Made Simple</h3>
               
               <div className="space-y-6">
                 {[
@@ -109,13 +109,13 @@ const ProblemSolutionSection = () => {
                   }
                 ].map((item, index) => (
                   <AnimatedCard key={index} delay={500 + index * 150} bounceDelay={300}>
-                    <div className="glass p-6 rounded-lg border border-stone-400/20 bg-stone-400/5 hover-lift transition-all duration-300 hover:border-stone-400/40 hover:bg-stone-400/10 group">
+                    <div className="glass p-6 rounded-lg border border-blue-400/20 bg-blue-400/5 hover-lift transition-all duration-300 hover:border-blue-400/40 hover:bg-blue-400/10 group">
                       <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-stone-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-stone-400/30 animate-circuit-pulse-smooth group-hover:scale-110 group-hover:animate-elastic-bounce transition-transform duration-300">
-                          <span className="text-stone-400 text-sm">{item.icon}</span>
+                        <div className="w-8 h-8 bg-blue-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-blue-400/30 animate-circuit-pulse-smooth group-hover:scale-110 group-hover:animate-elastic-bounce transition-transform duration-300">
+                          <span className="text-blue-400 text-sm">{item.icon}</span>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-white mb-2 group-hover:text-stone-400 transition-colors duration-300">{item.title}</h4>
+                          <h4 className="font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">{item.title}</h4>
                           <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{item.description}</p>
                         </div>
                       </div>

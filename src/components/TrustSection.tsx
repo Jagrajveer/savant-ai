@@ -9,28 +9,28 @@ const TrustSection = () => {
       icon: "✓",
       title: "Done-for-You Setup",
       description: "We build and integrate everything for you",
-      color: "emerald",
+      color: "blue",
       delay: 0
     },
     {
       icon: "📈",
       title: "Tailored to You", 
       description: "No generic bots — every solution is built around your business",
-      color: "blue",
+      color: "purple",
       delay: 200
     },
     {
       icon: "⏰",
       title: "Fast Turnaround",
       description: "Most projects are ready to launch in 7-14 days",
-      color: "purple", 
+      color: "blue", 
       delay: 400
     },
     {
       icon: "🛡️",
       title: "No Technical Headaches",
       description: "No code. No confusion. Just results.",
-      color: "orange",
+      color: "purple",
       delay: 600
     }
   ];
@@ -39,10 +39,10 @@ const TrustSection = () => {
     <section className="py-20 bg-gradient-to-br from-gray-900 to-black relative overflow-hidden">
       {/* Background Tech Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent animate-data-flow-smooth"></div>
-        <div className="absolute bottom-1/4 right-0 w-full h-px bg-gradient-to-l from-transparent via-blue-500/20 to-transparent animate-data-flow-smooth delay-1000"></div>
-        <div className="absolute top-10 right-20 w-4 h-4 bg-purple-400/30 rounded-full animate-neural-network-smooth"></div>
-        <div className="absolute bottom-10 left-20 w-3 h-3 bg-cyan-400/30 rounded-full animate-neural-network-smooth delay-1000"></div>
+        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent animate-data-flow-smooth"></div>
+        <div className="absolute bottom-1/4 right-0 w-full h-px bg-gradient-to-l from-transparent via-purple-500/20 to-transparent animate-data-flow-smooth delay-1000"></div>
+        <div className="absolute top-10 right-20 w-4 h-4 bg-blue-400/30 rounded-full animate-neural-network-smooth"></div>
+        <div className="absolute bottom-10 left-20 w-3 h-3 bg-purple-400/30 rounded-full animate-neural-network-smooth delay-1000"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
