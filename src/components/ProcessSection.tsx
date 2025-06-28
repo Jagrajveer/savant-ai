@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MessageCircle, Settings, Rocket, Users, Clock, TrendingUp, CheckCircle, Sparkles } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
@@ -53,7 +52,7 @@ const ProcessSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0}>
+        <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Here's How We Set You Up for <span className="bg-gradient-to-r from-slate-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-shift">AI-Powered Success</span>
@@ -67,8 +66,8 @@ const ProcessSection = () => {
         {/* Process Steps */}
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {processSteps.map((step, index) => (
-            <ScrollReveal key={index} direction="up" delay={200 + index * 200}>
-              <AnimatedCard delay={300 + index * 150} bounceDelay={400} className="text-center group relative">
+            <ScrollReveal key={index} direction="up">
+              <AnimatedCard className="text-center group relative">
                 {/* Connection line to next step */}
                 {index < processSteps.length - 1 && (
                   <div className="hidden md:block absolute top-10 -right-4 w-8 h-px bg-gradient-to-r from-slate-400/40 to-transparent animate-data-flow-smooth" style={{ animationDelay: `${index * 500}ms` }}></div>
@@ -106,7 +105,7 @@ const ProcessSection = () => {
                 
                 <div className={`text-${step.color}-400 text-sm group-hover:translate-y-1 transition-transform duration-300`}>
                   {step.features.map((feature, featureIndex) => (
-                    <ScrollReveal key={featureIndex} direction="up" delay={400 + index * 150 + featureIndex * 100}>
+                    <ScrollReveal key={featureIndex} direction="up">
                       <div className="flex items-center justify-center space-x-2 mb-2 group/feature hover:scale-105 transition-transform duration-300">
                         <CheckCircle className="w-4 h-4 group-hover/feature:animate-elastic-bounce" />
                         <span className="group-hover/feature:font-semibold transition-all duration-300">{feature}</span>
@@ -120,9 +119,9 @@ const ProcessSection = () => {
         </div>
 
         {/* Enhanced Timeline Badge */}
-        <ScrollReveal direction="scale" delay={600}>
+        <ScrollReveal direction="scale">
           <div className="text-center">
-            <AnimatedCard delay={700} bounceDelay={300}>
+            <AnimatedCard>
               <div className="inline-flex items-center space-x-3 glass text-slate-300 px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 hover:shadow-lg border border-gray-600 group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative">

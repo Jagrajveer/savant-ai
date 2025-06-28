@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Video, Calendar, Workflow } from 'lucide-react';
 import { SiSalesforce, SiHubspot, SiGmail, SiSlack, SiZoom } from 'react-icons/si';
@@ -64,15 +63,15 @@ const IntegrationsSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0}>
+        <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <h3 className="text-3xl font-bold text-white mb-8">Works With Your Favorite Tools</h3>
             
             {/* Integration Logos */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
               {integrations.map((integration, index) => (
-                <ScrollReveal key={index} direction="scale" delay={100 + index * 100}>
-                  <AnimatedCard delay={200 + index * 100} bounceDelay={300}>
+                <ScrollReveal key={index} direction="scale">
+                  <AnimatedCard>
                     <div className="flex flex-col items-center space-y-3 p-6 glass rounded-xl hover:shadow-2xl transition-all duration-500 hover:scale-110 group hover-lift relative overflow-hidden">
                       {/* Animated background glow */}
                       <div className={`absolute inset-0 ${integration.bgColor} opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-xl`}></div>
@@ -97,7 +96,7 @@ const IntegrationsSection = () => {
               ))}
             </div>
             
-            <ScrollReveal direction="up" delay={800}>
+            <ScrollReveal direction="up">
               <div className="flex items-center justify-center space-x-2 text-gray-300">
                 <Workflow className="w-5 h-5 animate-pulse" />
                 <p>+ Many more through custom integrations</p>
@@ -107,8 +106,8 @@ const IntegrationsSection = () => {
         </ScrollReveal>
 
         {/* Demo Section */}
-        <ScrollReveal direction="up" delay={600}>
-          <AnimatedCard delay={700} bounceDelay={400}>
+        <ScrollReveal direction="up">
+          <AnimatedCard>
             <div className="glass rounded-2xl p-12 text-center hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-700 group relative overflow-hidden">
               {/* Animated background */}
               <div className="absolute inset-0 bg-gradient-to-r from-gray-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -126,14 +125,14 @@ const IntegrationsSection = () => {
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">Watch a demo to see how our AI solutions can transform your business operations.</p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
-                <ScrollReveal direction="left" delay={800}>
+                <ScrollReveal direction="left">
                   <button className="flex items-center space-x-2 glass text-gray-400 px-6 py-3 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-lg group border border-gray-600 hover:border-gray-500 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <Video className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />
                     <span className="relative z-10">Watch a Demo</span>
                   </button>
                 </ScrollReveal>
-                <ScrollReveal direction="right" delay={900}>
+                <ScrollReveal direction="right">
                   <button className="flex items-center space-x-2 bg-gradient-to-r from-gray-600 to-blue-600 text-white px-6 py-3 rounded-lg hover:from-gray-700 hover:to-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg group relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                     <Calendar className="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 relative z-10" />

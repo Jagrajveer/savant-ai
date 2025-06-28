@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCard from './AnimatedCard';
@@ -16,7 +15,7 @@ const ProblemSolutionSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0}>
+        <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Still doing things <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">manually</span> that could be automated?
@@ -31,7 +30,7 @@ const ProblemSolutionSection = () => {
         {/* Problem vs Solution Grid */}
         <div className="grid md:grid-cols-2 gap-12">
           {/* Current Challenges */}
-          <ScrollReveal direction="left" delay={200}>
+          <ScrollReveal direction="left">
             <div className="group">
               <div className="flex items-center space-x-2 mb-6">
                 <div className="w-6 h-6 bg-red-400/20 rounded-full flex items-center justify-center border border-red-400/30 animate-circuit-pulse-smooth">
@@ -60,7 +59,7 @@ const ProblemSolutionSection = () => {
                     description: "Multiple tools and platforms that don't work together create bottlenecks and confusion"
                   }
                 ].map((item, index) => (
-                  <AnimatedCard key={index} delay={400 + index * 150} bounceDelay={300}>
+                  <AnimatedCard key={index}>
                     <div className="glass p-6 rounded-lg border border-red-400/20 bg-red-400/5 hover-lift transition-all duration-300 hover:border-red-400/40 hover:bg-red-400/10 group">
                       <div className="flex items-start space-x-3">
                         <div className="w-8 h-8 bg-red-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-red-400/30 animate-circuit-pulse-smooth group-hover:scale-110 group-hover:animate-elastic-bounce transition-transform duration-300">
@@ -79,7 +78,7 @@ const ProblemSolutionSection = () => {
           </ScrollReveal>
 
           {/* Our Solution */}
-          <ScrollReveal direction="right" delay={300}>
+          <ScrollReveal direction="right">
             <div className="group">
               <div className="flex items-center space-x-2 mb-6">
                 <div className="w-6 h-6 bg-blue-400/20 rounded-full flex items-center justify-center border border-blue-400/30 animate-circuit-pulse-smooth">
@@ -108,7 +107,7 @@ const ProblemSolutionSection = () => {
                     description: "Most projects are ready to launch in 7-14 days, delivering value quickly"
                   }
                 ].map((item, index) => (
-                  <AnimatedCard key={index} delay={500 + index * 150} bounceDelay={300}>
+                  <AnimatedCard key={index}>
                     <div className="glass p-6 rounded-lg border border-blue-400/20 bg-blue-400/5 hover-lift transition-all duration-300 hover:border-blue-400/40 hover:bg-blue-400/10 group">
                       <div className="flex items-start space-x-3">
                         <div className="w-8 h-8 bg-blue-400/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-blue-400/30 animate-circuit-pulse-smooth group-hover:scale-110 group-hover:animate-elastic-bounce transition-transform duration-300">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCard from './AnimatedCard';
@@ -47,7 +46,7 @@ const TrustSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0}>
+        <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Why Growing Businesses <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">Choose SavantAI</span>
@@ -61,8 +60,6 @@ const TrustSection = () => {
           {trustItems.map((item, index) => (
             <AnimatedCard 
               key={index}
-              delay={item.delay}
-              bounceDelay={300}
               className="text-center group"
             >
               <div className={`glass rounded-xl p-6 border border-gray-700 hover:border-${item.color}-500/50 transition-all duration-500 hover-lift gpu-accelerated`}>

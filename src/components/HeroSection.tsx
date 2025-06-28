@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Zap, CheckCircle, Play, BarChart3, Calendar, Brain, Target, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -40,7 +39,7 @@ const HeroSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Enhanced Trust Badge */}
-        <ScrollReveal direction="scale" delay={0}>
+        <ScrollReveal direction="scale">
           <div className="inline-flex items-center space-x-3 glass text-slate-300 px-6 py-3 rounded-full mb-8 hover:scale-105 transition-all duration-300 hover-lift group border border-slate-600 gpu-accelerated">
             <div className="relative">
               <Zap size={18} className="animate-pulse text-indigo-400 group-hover:rotate-12 transition-transform duration-300" />
@@ -52,7 +51,7 @@ const HeroSection = () => {
         </ScrollReveal>
 
         {/* Main Headline */}
-        <ScrollReveal direction="up" delay={200}>
+        <ScrollReveal direction="up">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             Scale Smarter with{' '}
             <span className="bg-gradient-to-r from-slate-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-shift relative">
@@ -65,14 +64,14 @@ const HeroSection = () => {
         </ScrollReveal>
 
         {/* Subheadline */}
-        <ScrollReveal direction="up" delay={400}>
+        <ScrollReveal direction="up">
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
             Save time, cut costs, and grow faster by automating the work that slows your team down.
           </p>
         </ScrollReveal>
 
         {/* Enhanced Social Proof Badge */}
-        <ScrollReveal direction="scale" delay={500}>
+        <ScrollReveal direction="scale">
           <div className="inline-flex items-center space-x-3 glass text-gray-300 px-6 py-3 rounded-full mb-12 hover:scale-105 transition-all duration-300 hover-lift group border border-gray-600">
             <div className="relative">
               <BarChart3 className="w-5 h-5 text-stone-400 group-hover:scale-110 transition-transform duration-300" />
@@ -84,7 +83,7 @@ const HeroSection = () => {
         </ScrollReveal>
 
         {/* Enhanced What You'll Get Section */}
-        <AnimatedCard delay={600} bounceDelay={400} className="max-w-2xl mx-auto mb-12">
+        <AnimatedCard className="max-w-2xl mx-auto mb-12">
           <div className="glass rounded-2xl p-8 hover:shadow-2xl transition-all duration-500 hover-lift border border-gray-700 group relative overflow-hidden gpu-accelerated">
             {/* Animated background accent */}
             <div className="absolute inset-0 bg-gradient-to-r from-stone-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -96,7 +95,7 @@ const HeroSection = () => {
                 "A custom AI automation roadmap", 
                 "Answers to your top questions — no tech skills needed"
               ].map((item, index) => (
-                <ScrollReveal key={index} direction="left" delay={700 + index * 100}>
+                <ScrollReveal key={index} direction="left">
                   <div className="flex items-center space-x-4 group/item hover:translate-x-2 transition-all duration-300">
                     <div className="w-8 h-8 bg-stone-500/20 rounded-full flex items-center justify-center group-hover/item:scale-110 group-hover/item:animate-elastic-bounce transition-transform duration-300 border border-stone-500/30 animate-circuit-pulse-smooth relative">
                       <CheckCircle className="w-5 h-5 text-stone-400" />
@@ -111,7 +110,7 @@ const HeroSection = () => {
         </AnimatedCard>
 
         {/* Enhanced CTA Buttons */}
-        <ScrollReveal direction="up" delay={800}>
+        <ScrollReveal direction="up">
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link
               to="/demo-call"
@@ -135,7 +134,7 @@ const HeroSection = () => {
         </ScrollReveal>
 
         {/* Bottom tagline */}
-        <ScrollReveal direction="up" delay={1000}>
+        <ScrollReveal direction="up">
           <p className="text-gray-400 mt-8 flex items-center justify-center space-x-4">
             <span>No code required</span>
             <Sparkles className="w-4 h-4 animate-pulse" />

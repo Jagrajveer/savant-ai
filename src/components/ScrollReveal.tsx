@@ -44,7 +44,6 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       style={{
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
-        transitionDelay: `${delay}ms`,
         willChange: 'transform, opacity'
       }}
     >

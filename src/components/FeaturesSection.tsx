@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Bot, Zap, BarChart3, Puzzle, Sparkles, Brain, Target, Cog } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
@@ -59,7 +58,7 @@ const FeaturesSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0}>
+        <ScrollReveal direction="up">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               What We Can <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">Automate for You</span>
@@ -75,8 +74,6 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <AnimatedCard 
               key={index}
-              delay={200 + index * 150}
-              bounceDelay={500}
               className="group"
             >
               <div className={`glass rounded-2xl p-8 hover:shadow-2xl hover:${feature.glowColor} transition-all duration-500 border border-gray-700 hover-lift relative overflow-hidden gpu-accelerated`}>
@@ -112,8 +109,7 @@ const FeaturesSection = () => {
                   {feature.capabilities.map((capability, capIndex) => (
                     <ScrollReveal 
                       key={capIndex}
-                      direction="left" 
-                      delay={400 + index * 150 + capIndex * 50}
+                      direction="left"
                       className="flex items-center space-x-2 group-hover:translate-x-1 transition-all duration-300 relative"
                     >
                       <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 group-hover:animate-elastic-bounce transition-transform duration-300 animate-pulse relative">

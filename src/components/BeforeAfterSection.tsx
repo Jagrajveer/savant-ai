@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCard from './AnimatedCard';
@@ -16,9 +15,9 @@ const BeforeAfterSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <ScrollReveal direction="up" delay={0}>
+        <ScrollReveal direction="up">
           <div className="text-center mb-16">
-            <AnimatedCard delay={100} bounceDelay={200}>
+            <AnimatedCard>
               <div className="inline-flex items-center space-x-2 glass text-blue-300 px-4 py-2 rounded-full mb-6 border border-blue-500/30 hover:scale-105 transition-all duration-300 group">
                 <span className="text-sm group-hover:font-semibold transition-all duration-300">✓ Real Results</span>
               </div>
@@ -33,8 +32,8 @@ const BeforeAfterSection = () => {
         {/* Before vs After Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Before AI */}
-          <ScrollReveal direction="left" delay={200}>
-            <AnimatedCard delay={300} bounceDelay={400}>
+          <ScrollReveal direction="left">
+            <AnimatedCard>
               <div className="glass rounded-2xl p-8 border border-red-500/30 bg-red-500/5 hover-lift transition-all duration-500 hover:border-red-500/50 hover:bg-red-500/10 group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
@@ -52,7 +51,7 @@ const BeforeAfterSection = () => {
                     "Phone tag with clients",
                     "Double bookings"
                   ].map((item, index) => (
-                    <ScrollReveal key={index} direction="right" delay={400 + index * 100}>
+                    <ScrollReveal key={index} direction="right">
                       <div className="flex items-center space-x-3 transition-all duration-300 hover:translate-x-2 group/item">
                         <div className="relative">
                           <span className="text-red-400 animate-pulse">•</span>
@@ -72,8 +71,8 @@ const BeforeAfterSection = () => {
           </ScrollReveal>
 
           {/* After AI */}
-          <ScrollReveal direction="right" delay={300}>
-            <AnimatedCard delay={400} bounceDelay={500}>
+          <ScrollReveal direction="right">
+            <AnimatedCard>
               <div className="glass rounded-2xl p-8 border border-emerald-500/30 bg-emerald-500/5 hover-lift transition-all duration-500 hover:border-emerald-500/50 hover:bg-emerald-500/10 group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
@@ -91,7 +90,7 @@ const BeforeAfterSection = () => {
                     "Automated reminders", 
                     "Zero conflicts"
                   ].map((item, index) => (
-                    <ScrollReveal key={index} direction="left" delay={500 + index * 100}>
+                    <ScrollReveal key={index} direction="left">
                       <div className="flex items-center space-x-3 transition-all duration-300 hover:translate-x-2 group/item">
                         <div className="relative">
                           <span className="text-emerald-400 animate-pulse">•</span>
@@ -112,7 +111,7 @@ const BeforeAfterSection = () => {
         </div>
 
         {/* CTA */}
-        <ScrollReveal direction="up" delay={600}>
+        <ScrollReveal direction="up">
           <div className="text-center">
             <button className="text-blue-400 hover:text-blue-300 transition-all duration-300 text-lg font-medium hover:scale-105 transform group relative">
               <span className="relative z-10">See how we can automate your workflows</span>

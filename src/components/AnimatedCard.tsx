@@ -25,8 +25,7 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
           : 'opacity-0 translate-y-8 scale-95'
       } ${className}`}
       style={{
-        transitionDelay: `${delay}ms`,
-        animation: isVisible ? `bounce-in-card 0.8s ease-out ${delay + bounceDelay}ms both` : undefined
+        animation: isVisible ? `bounce-in-card 0.8s ease-out both` : undefined
       }}
     >
       {children}
