@@ -12,21 +12,21 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
   children, 
   delay = 0, 
   className = '',
-  bounceDelay = 200
+  bounceDelay = 100
 }) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-500 ease-out transform ${
+      className={`transition-all duration-300 ease-out transform ${
         isVisible 
           ? 'opacity-100 translate-y-0 scale-100' 
           : 'opacity-0 translate-y-8 scale-95'
       } ${className}`}
       style={{
         transitionDelay: `${delay}ms`,
-        animation: isVisible ? `bounce-in-card 0.6s ease-out ${delay + bounceDelay}ms both` : undefined
+        animation: isVisible ? `bounce-in-card 0.4s ease-out ${delay + bounceDelay}ms both` : undefined
       }}
     >
       {children}

@@ -40,7 +40,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-500 ease-out ${className}`}
+      className={`transition-all duration-300 ease-out ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
