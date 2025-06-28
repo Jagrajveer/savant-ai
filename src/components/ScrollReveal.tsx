@@ -14,9 +14,9 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   direction = 'up',
   delay = 0,
   className = '',
-  threshold = 0.01
+  threshold = 0.001
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold, rootMargin: '100px' });
+  const { ref, isVisible } = useScrollAnimation({ threshold, rootMargin: '200px' });
 
   const getTransform = () => {
     if (isVisible) return 'translate3d(0, 0, 0) scale(1)';

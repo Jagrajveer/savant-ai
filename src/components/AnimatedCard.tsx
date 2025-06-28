@@ -14,7 +14,7 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({
   className = '',
   bounceDelay = 300
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.01, rootMargin: '100px' });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.001, rootMargin: '200px' });
 
   return (
     <div
