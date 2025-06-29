@@ -4,8 +4,8 @@ import ScrollReveal from './ScrollReveal';
 
 const FeaturesSection = () => {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
-  const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const innerScrollDivRef = useRef<HTMLDivElement>(null);
 
   const features = [
     {
@@ -47,37 +47,47 @@ const FeaturesSection = () => {
   ];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = featureRefs.current.findIndex(ref => ref === entry.target);
-            if (index !== -1) {
-              setActiveFeatureIndex(index);
-            }
-          }
-        });
-      },
-      {
-        root: scrollContainerRef.current,
-        threshold: 0.5,
-        rootMargin: '-20% 0px -20% 0px'
+    const handleScroll = () => {
+      if (!sectionRef.current || !innerScrollDivRef.current) return;
+
+      const sectionTop = sectionRef.current.offsetTop;
+      const sectionHeight = sectionRef.current.offsetHeight;
+      const windowScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Calculate if we're in the sticky section area
+      const sectionStart = sectionTop;
+      const sectionEnd = sectionTop + (window.innerHeight * 3); // 3x viewport height for scroll space
+
+      if (windowScrollY >= sectionStart && windowScrollY <= sectionEnd) {
+        // Calculate scroll progress within the section (0 to 1)
+        const scrollProgress = (windowScrollY - sectionStart) / (sectionEnd - sectionStart);
+        
+        // Map scroll progress to internal scroll
+        const maxInternalScroll = innerScrollDivRef.current.scrollHeight - innerScrollDivRef.current.clientHeight;
+        const targetScrollTop = scrollProgress * maxInternalScroll;
+        
+        innerScrollDivRef.current.scrollTop = targetScrollTop;
+
+        // Update active feature based on scroll progress
+        const newActiveIndex = Math.min(
+          Math.floor(scrollProgress * features.length),
+          features.length - 1
+        );
+        setActiveFeatureIndex(Math.max(0, newActiveIndex));
       }
-    );
-
-    featureRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => {
-      featureRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
     };
-  }, []);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [features.length]);
 
   return (
-    <section id="features" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
+    <section 
+      ref={sectionRef}
+      id="features" 
+      className="sticky top-0 h-screen bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden"
+    >
       {/* Enhanced Background AI Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-32 h-32 border border-blue-500/10 rounded-full animate-circuit-pulse-smooth delay-0"></div>
@@ -89,84 +99,75 @@ const FeaturesSection = () => {
         <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent animate-data-flow-smooth delay-1000"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-full flex flex-col">
         {/* Section Header */}
-        <ScrollReveal direction="up">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              What We Can <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">Automate for You</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              From customer interactions to back-office tasks, we build custom AI solutions that make your business run smoother.
-            </p>
-          </div>
-        </ScrollReveal>
+        <div className="text-center pt-10 pb-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            What We Can <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient-shift">Automate for You</span>
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            From customer interactions to back-office tasks, we build custom AI solutions that make your business run smoother.
+          </p>
+        </div>
 
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 flex-1">
           {/* Left Column - Scrollable Text Content */}
           <div 
-            ref={scrollContainerRef}
-            className="h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 pr-4"
+            ref={innerScrollDivRef}
+            className="h-full overflow-y-hidden"
           >
-            <div className="space-y-32">
+            <div className="space-y-0">
               {features.map((feature, index) => (
                 <div 
                   key={index}
-                  ref={(el) => featureRefs.current[index] = el}
-                  className="group min-h-[400px] flex flex-col justify-center"
+                  className="group h-screen flex flex-col justify-center px-4"
                 >
                   {/* Icon and Title */}
-                  <ScrollReveal direction="left" delay={100}>
-                    <div className="flex items-center space-x-4 mb-8">
-                      <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center transition-all duration-500 animate-circuit-pulse-smooth relative overflow-hidden`}>
-                        <feature.icon className="w-8 h-8 text-white relative z-10" />
-                        
-                        {/* Orbiting particles */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                          <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                          <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
-                          <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
-                        </div>
+                  <div className="flex items-center space-x-4 mb-8">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center transition-all duration-500 animate-circuit-pulse-smooth relative overflow-hidden`}>
+                      <feature.icon className="w-8 h-8 text-white relative z-10" />
+                      
+                      {/* Orbiting particles */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+                        <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
+                        <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
                       </div>
-                      <h3 className="text-3xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">
-                        {feature.title}
-                      </h3>
                     </div>
-                  </ScrollReveal>
+                    <h3 className="text-3xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">
+                      {feature.title}
+                    </h3>
+                  </div>
                   
                   {/* Description */}
-                  <ScrollReveal direction="left" delay={200}>
-                    <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </ScrollReveal>
+                  <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                    {feature.description}
+                  </p>
                   
                   {/* Capabilities */}
-                  <ScrollReveal direction="left" delay={300}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {feature.capabilities.map((capability, capIndex) => (
-                        <div 
-                          key={capIndex}
-                          className="flex items-center space-x-3 group-hover:translate-x-1 transition-all duration-300"
-                        >
-                          <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse relative">
-                            <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
-                          </div>
-                          <span className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
-                            {capability}
-                          </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {feature.capabilities.map((capability, capIndex) => (
+                      <div 
+                        key={capIndex}
+                        className="flex items-center space-x-3 group-hover:translate-x-1 transition-all duration-300"
+                      >
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse relative">
+                          <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
                         </div>
-                      ))}
-                    </div>
-                  </ScrollReveal>
+                        <span className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                          {capability}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
           
           {/* Right Column - Fixed Image Display */}
-          <div className="sticky top-20 h-[600px] flex items-center justify-center">
+          <div className="h-full flex items-center justify-center">
             <div className="relative w-full h-full max-w-lg">
               {/* Image Container */}
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
