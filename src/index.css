@@ -262,16 +262,6 @@
     }
   }
 
-  /* Gradient shift animation for text */
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
   /* Staggered animation utilities */
   .stagger-animation > * {
     animation-delay: calc(var(--stagger-delay, 100ms) * var(--stagger-index, 0));
@@ -318,12 +308,7 @@
     animation: float-smooth 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
   }
 
-  .animate-gradient-shift {
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease-in-out infinite;
-  }
-
-  /* Enhanced glass effect with better performance */
+  /* Enhanced glass effect with better performance - FIXED: Removed transform on hover */
   .glass {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
@@ -335,6 +320,7 @@
   .glass:hover {
     background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.24);
+    /* Removed: transform: translateY(-2px); */
   }
 
   /* Enhanced hover effects */
@@ -363,11 +349,6 @@
   .gpu-accelerated {
     transform: translateZ(0);
     will-change: transform, opacity;
-  }
-
-  /* Horizontal slider specific styles */
-  .feature-card-inner {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Delay classes with extended range */
