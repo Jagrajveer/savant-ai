@@ -2,7 +2,6 @@ import React from 'react';
 import { Bot, Zap, BarChart3, Puzzle, Sparkles, Brain, Target, Cog } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCard from './AnimatedCard';
-import { useStaggeredAnimation } from '../hooks/useScrollAnimation';
 
 const FeaturesSection = () => {
   const features = [
@@ -44,8 +43,6 @@ const FeaturesSection = () => {
     }
   ];
 
-  const { ref: staggerRef, visibleItems } = useStaggeredAnimation(features.length, 150);
-
   return (
     <section id="features" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
       {/* Enhanced Background AI Elements */}
@@ -72,16 +69,12 @@ const FeaturesSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Features Grid with staggered animation */}
-        <div ref={staggerRef} className="grid md:grid-cols-2 gap-8">
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
-            <div
+            <AnimatedCard 
               key={index}
-              className={`group transition-all duration-500 ease-out ${
-                visibleItems[index] 
-                  ? 'opacity-100 translate-y-0 scale-100' 
-                  : 'opacity-0 translate-y-8 scale-95'
-              }`}
+              className="group"
             >
               <div className={`glass rounded-2xl p-8 hover:shadow-2xl hover:${feature.glowColor} transition-all duration-500 border border-gray-700 hover-lift relative overflow-hidden gpu-accelerated`}>
                 {/* Animated background gradient */}
@@ -110,14 +103,13 @@ const FeaturesSection = () => {
                 </div>
                 
                 <h3 className="text-2xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-blue-400 relative z-10">{feature.title}</h3>
-                <p className="text-gray-300 mb-6 text-lg relative z-10 group-hover:text-gray-200 transition-colors duration-300">{feature.description}</p>
+                <p className="text-gray-300 mb-6 text-lg relative z-10">{feature.description}</p>
                 
                 <div className="grid grid-cols-2 gap-3 relative z-10">
                   {feature.capabilities.map((capability, capIndex) => (
                     <ScrollReveal 
                       key={capIndex}
                       direction="left"
-                      delay={capIndex * 100}
                       className="flex items-center space-x-2 group-hover:translate-x-1 transition-all duration-300 relative"
                     >
                       <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 group-hover:animate-elastic-bounce transition-transform duration-300 animate-pulse relative">
@@ -134,7 +126,7 @@ const FeaturesSection = () => {
                   <div className={`w-full h-full bg-gradient-to-bl ${feature.gradient} opacity-10 rounded-bl-3xl`}></div>
                 </div>
               </div>
-            </div>
+            </AnimatedCard>
           ))}
         </div>
       </div>
