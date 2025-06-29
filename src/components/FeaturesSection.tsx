@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Bot, Zap, BarChart3, Puzzle, Sparkles, Brain, Target, Cog } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
-import AnimatedCard from './AnimatedCard';
 
 const FeaturesSection = () => {
+  const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
+  const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const features = [
     {
       number: "01",
@@ -47,6 +50,36 @@ const FeaturesSection = () => {
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = featureRefs.current.findIndex(ref => ref === entry.target);
+            if (index !== -1) {
+              setActiveFeatureIndex(index);
+            }
+          }
+        });
+      },
+      {
+        root: scrollContainerRef.current,
+        threshold: 0.5,
+        rootMargin: '-20% 0px -20% 0px'
+      }
+    );
+
+    featureRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      featureRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
   return (
     <section id="features" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
       {/* Enhanced Background AI Elements */}
@@ -73,104 +106,118 @@ const FeaturesSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Fixed Height Scrollable Features Container */}
-        <div className="h-[700px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-          <div className="space-y-16 pr-4">
-            {features.map((feature, index) => (
-              <AnimatedCard 
-                key={index}
-                className="group"
-              >
-                {/* Removed glass background from card */}
-                <div className={`rounded-2xl p-8 transition-all duration-500 border-0 relative overflow-hidden gpu-accelerated`}>
-                  {/* Animated background gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
-                  {/* Feature Header */}
-                  <div className="relative mb-8">
-                    {/* Feature Number */}
-                    <ScrollReveal direction="left">
-                      <div className="text-4xl font-bold text-gray-500 mb-4 relative z-10">
-                        {feature.number}
-                      </div>
-                    </ScrollReveal>
-                    
-                    {/* Icon and Title */}
-                    <ScrollReveal direction="left" delay={100}>
-                      <div className="flex items-center space-x-3 mb-6 relative z-10">
-                        <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-elastic-bounce animate-circuit-pulse-smooth relative overflow-hidden`}>
-                          <feature.icon className="w-8 h-8 text-white transition-all duration-500 group-hover:scale-110 relative z-10" />
-                          
-                          {/* Orbiting particles */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                            <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
-                            <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
-                          </div>
-                        </div>
-                        <h3 className="text-3xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">{feature.title}</h3>
-                      </div>
-                    </ScrollReveal>
-                  </div>
-                  
-                  {/* Two Column Layout */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
-                    {/* Left Column - Text Content */}
-                    <div className="space-y-6">
-                      {/* Description - animates from left */}
-                      <ScrollReveal direction="left" delay={200}>
-                        <p className="text-gray-300 text-lg group-hover:text-gray-200 transition-colors duration-300">
-                          {feature.description}
-                        </p>
-                      </ScrollReveal>
-                      
-                      {/* Capabilities - animates from left */}
-                      <ScrollReveal direction="left" delay={300}>
-                        <div className="grid grid-cols-2 gap-3">
-                          {feature.capabilities.map((capability, capIndex) => (
-                            <div 
-                              key={capIndex}
-                              className="flex items-center space-x-2 group-hover:translate-x-1 transition-all duration-300 relative"
-                            >
-                              <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 group-hover:animate-elastic-bounce transition-transform duration-300 animate-pulse relative">
-                                {/* Ripple effect */}
-                                <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
-                              </div>
-                              <span className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">{capability}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </ScrollReveal>
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - Scrollable Text Content */}
+          <div 
+            ref={scrollContainerRef}
+            className="h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 pr-4"
+          >
+            <div className="space-y-32">
+              {features.map((feature, index) => (
+                <div 
+                  key={index}
+                  ref={(el) => featureRefs.current[index] = el}
+                  className="group min-h-[400px] flex flex-col justify-center"
+                >
+                  {/* Feature Number */}
+                  <ScrollReveal direction="left">
+                    <div className="text-6xl font-bold text-gray-500 mb-6 opacity-50">
+                      {feature.number}
                     </div>
-                    
-                    {/* Right Column - Image Content - reveals after text */}
-                    <div className="flex justify-center">
-                      <ScrollReveal direction="scale" delay={500}>
-                        <div className="relative group/image">
-                          <img 
-                            src={feature.imageUrl} 
-                            alt={feature.title}
-                            className="w-full h-64 rounded-lg object-cover shadow-lg transition-all duration-500 group-hover/image:scale-105 group-hover/image:shadow-2xl"
-                          />
-                          {/* Image overlay effect */}
-                          <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover/image:opacity-20 transition-opacity duration-500 rounded-lg`}></div>
-                          
-                          {/* Floating accent */}
-                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue-400 rounded-full opacity-0 group-hover/image:opacity-100 transition-all duration-500 animate-bounce">
-                            <Sparkles className="w-4 h-4 text-white m-1" />
-                          </div>
-                        </div>
-                      </ScrollReveal>
-                    </div>
-                  </div>
+                  </ScrollReveal>
                   
-                  {/* Interactive corner accent */}
-                  <div className="absolute top-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className={`w-full h-full bg-gradient-to-bl ${feature.gradient} opacity-10 rounded-bl-3xl`}></div>
-                  </div>
+                  {/* Icon and Title */}
+                  <ScrollReveal direction="left" delay={100}>
+                    <div className="flex items-center space-x-4 mb-8">
+                      <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center transition-all duration-500 animate-circuit-pulse-smooth relative overflow-hidden`}>
+                        <feature.icon className="w-8 h-8 text-white relative z-10" />
+                        
+                        {/* Orbiting particles */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+                          <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
+                          <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
+                        </div>
+                      </div>
+                      <h3 className="text-3xl font-bold text-white transition-colors duration-300 group-hover:text-blue-400">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </ScrollReveal>
+                  
+                  {/* Description */}
+                  <ScrollReveal direction="left" delay={200}>
+                    <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </ScrollReveal>
+                  
+                  {/* Capabilities */}
+                  <ScrollReveal direction="left" delay={300}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {feature.capabilities.map((capability, capIndex) => (
+                        <div 
+                          key={capIndex}
+                          className="flex items-center space-x-3 group-hover:translate-x-1 transition-all duration-300"
+                        >
+                          <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse relative">
+                            <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+                          </div>
+                          <span className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                            {capability}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollReveal>
                 </div>
-              </AnimatedCard>
-            ))}
+              ))}
+            </div>
+          </div>
+          
+          {/* Right Column - Fixed Image Display */}
+          <div className="sticky top-20 h-[600px] flex items-center justify-center">
+            <div className="relative w-full h-full max-w-lg">
+              {/* Image Container */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src={features[activeFeatureIndex].imageUrl} 
+                  alt={features[activeFeatureIndex].title}
+                  className="w-full h-full object-cover transition-all duration-700 ease-out"
+                  key={activeFeatureIndex} // Force re-render for smooth transition
+                />
+                
+                {/* Image overlay effect */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${features[activeFeatureIndex].gradient} opacity-20 transition-all duration-700`}></div>
+                
+                {/* Feature indicator */}
+                <div className="absolute top-6 left-6 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
+                  <span className="text-white font-semibold">
+                    {features[activeFeatureIndex].number}
+                  </span>
+                </div>
+                
+                {/* Floating accent */}
+                <div className="absolute -top-3 -right-3 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center animate-bounce shadow-lg">
+                  <Sparkles className="w-5 h-5 text-white" />
+                </div>
+              </div>
+              
+              {/* Progress indicators */}
+              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {features.map((_, index) => (
+                  <div 
+                    key={index}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === activeFeatureIndex 
+                        ? 'bg-blue-400 scale-125' 
+                        : 'bg-gray-600 hover:bg-gray-500'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
