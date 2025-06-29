@@ -4,10 +4,8 @@ import ScrollReveal from './ScrollReveal';
 
 const FeaturesSection = () => {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
-  const [isScrollLocked, setIsScrollLocked] = useState(false);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
 
   const features = [
     {
@@ -48,88 +46,6 @@ const FeaturesSection = () => {
     }
   ];
 
-  // Scroll locking effect
-  useEffect(() => {
-    const sectionElement = sectionRef.current;
-    if (!sectionElement) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          // Section is visible, lock scroll
-          setIsScrollLocked(true);
-          document.body.style.overflow = 'hidden';
-          document.body.style.height = '100vh';
-        } else {
-          // Section is not visible, unlock scroll
-          setIsScrollLocked(false);
-          document.body.style.overflow = '';
-          document.body.style.height = '';
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '-10% 0px -10% 0px'
-      }
-    );
-
-    observer.observe(sectionElement);
-
-    return () => {
-      observer.disconnect();
-      // Cleanup: ensure scroll is unlocked when component unmounts
-      document.body.style.overflow = '';
-      document.body.style.height = '';
-    };
-  }, []);
-
-  // Handle wheel events to control internal scrolling when locked
-  useEffect(() => {
-    if (!isScrollLocked || !scrollContainerRef.current) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      
-      const container = scrollContainerRef.current;
-      if (!container) return;
-
-      const scrollAmount = e.deltaY;
-      const currentScroll = container.scrollTop;
-      const maxScroll = container.scrollHeight - container.clientHeight;
-
-      // Check if we've reached the end of internal scrolling
-      if (scrollAmount > 0 && currentScroll >= maxScroll - 10) {
-        // Scrolling down and reached the bottom, unlock main scroll
-        setIsScrollLocked(false);
-        document.body.style.overflow = '';
-        document.body.style.height = '';
-        return;
-      }
-
-      // Check if we've reached the top of internal scrolling
-      if (scrollAmount < 0 && currentScroll <= 10) {
-        // Scrolling up and reached the top, unlock main scroll
-        setIsScrollLocked(false);
-        document.body.style.overflow = '';
-        document.body.style.height = '';
-        return;
-      }
-
-      // Normal internal scrolling
-      container.scrollTop += scrollAmount;
-    };
-
-    if (isScrollLocked) {
-      window.addEventListener('wheel', handleWheel, { passive: false });
-    }
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, [isScrollLocked]);
-
-  // Feature card intersection observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -161,11 +77,7 @@ const FeaturesSection = () => {
   }, []);
 
   return (
-    <section 
-      ref={sectionRef}
-      id="features" 
-      className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden min-h-screen"
-    >
+    <section id="features" className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
       {/* Enhanced Background AI Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-32 h-32 border border-blue-500/10 rounded-full animate-circuit-pulse-smooth delay-0"></div>
@@ -187,11 +99,6 @@ const FeaturesSection = () => {
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               From customer interactions to back-office tasks, we build custom AI solutions that make your business run smoother.
             </p>
-            {isScrollLocked && (
-              <div className="mt-4 text-sm text-blue-400 animate-pulse">
-                Scroll through the features below ↓
-              </div>
-            )}
           </div>
         </ScrollReveal>
 
@@ -200,8 +107,17 @@ const FeaturesSection = () => {
           {/* Left Column - Scrollable Text Content */}
           <div 
             ref={scrollContainerRef}
-            className="h-[600px] overflow-y-auto overflow-x-hidden pr-4 hide-scrollbar"
+            className="h-[600px] overflow-y-auto overflow-x-hidden pr-4"
+            style={{
+              scrollbarWidth: 'none', /* Firefox */
+              msOverflowStyle: 'none', /* Internet Explorer 10+ */
+            }}
           >
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none; /* Safari and Chrome */
+              }
+            `}</style>
             <div className="space-y-32">
               {features.map((feature, index) => (
                 <div 
