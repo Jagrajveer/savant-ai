@@ -5,24 +5,22 @@ interface AnimatedCardProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
-  bounceDelay?: number;
 }
 
 const AnimatedCard: React.FC<AnimatedCardProps> = ({ 
   children, 
   delay = 0, 
-  className = '',
-  bounceDelay = 300
+  className = ''
 }) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.001, rootMargin: '200px' });
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out transform ${
+      className={`transition-all duration-700 ease-out ${
         isVisible 
-          ? 'opacity-100 translate-y-0 scale-100' 
-          : 'opacity-0 translate-y-8 scale-95'
+          ? 'opacity-100' 
+          : 'opacity-0'
       } ${className}`}
       style={{
         transitionDelay: `${delay}ms`
