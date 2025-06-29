@@ -107,8 +107,17 @@ const FeaturesSection = () => {
           {/* Left Column - Scrollable Text Content */}
           <div 
             ref={scrollContainerRef}
-            className="h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 pr-4"
+            className="h-[600px] overflow-y-auto overflow-x-hidden pr-4"
+            style={{
+              scrollbarWidth: 'none', /* Firefox */
+              msOverflowStyle: 'none', /* Internet Explorer 10+ */
+            }}
           >
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none; /* Safari and Chrome */
+              }
+            `}</style>
             <div className="space-y-32">
               {features.map((feature, index) => (
                 <div 

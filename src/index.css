@@ -396,6 +396,16 @@
   .transition-delay-200 { transition-delay: 200ms; }
   .transition-delay-300 { transition-delay: 300ms; }
   .transition-delay-500 { transition-delay: 500ms; }
+
+  /* Hide scrollbars utility classes */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
 }
 
 /* Smooth scrolling for navigation with better performance */
