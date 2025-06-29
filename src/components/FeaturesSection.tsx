@@ -72,53 +72,61 @@ const FeaturesSection = () => {
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature, index) => (
-            <AnimatedCard 
+            <ScrollReveal 
               key={index}
+              direction="up"
+              delay={index * 150}
               className="group"
             >
               <div className={`glass rounded-2xl p-8 hover:shadow-2xl hover:${feature.glowColor} transition-all duration-500 border border-gray-700 hover-lift relative overflow-hidden gpu-accelerated`}>
                 {/* Animated background gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
                 
-                {/* Icon container with enhanced animations */}
-                <div className="relative mb-6">
-                  <div className={`w-20 h-20 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-elastic-bounce animate-circuit-pulse-smooth relative overflow-hidden`}>
-                    {/* Primary icon */}
-                    <feature.icon className="w-10 h-10 text-white transition-all duration-500 group-hover:scale-110 relative z-10" />
-                    
-                    {/* Secondary floating icon */}
-                    <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:rotate-12">
-                      <div className={`w-6 h-6 bg-gradient-to-r ${feature.gradient} rounded-full flex items-center justify-center animate-bounce`}>
-                        <feature.secondaryIcon className="w-3 h-3 text-white" />
+                {/* Main content with flex layout */}
+                <div className="flex items-start space-x-6 relative z-10">
+                  {/* Icon container (Left Side) */}
+                  <ScrollReveal direction="up" delay={index * 150 + 100}>
+                    <div className="relative">
+                      <div className={`w-20 h-20 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:animate-elastic-bounce animate-circuit-pulse-smooth relative overflow-hidden`}>
+                        {/* Primary icon */}
+                        <feature.icon className="w-10 h-10 text-white transition-all duration-500 group-hover:scale-110 relative z-10" />
+                        
+                        {/* Secondary floating icon */}
+                        <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:rotate-12">
+                          <div className={`w-6 h-6 bg-gradient-to-r ${feature.gradient} rounded-full flex items-center justify-center animate-bounce`}>
+                            <feature.secondaryIcon className="w-3 h-3 text-white" />
+                          </div>
+                        </div>
+                        
+                        {/* Orbiting particles */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+                          <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
+                          <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
+                        </div>
                       </div>
                     </div>
-                    
-                    {/* Orbiting particles */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                      <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
-                      <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
-                    </div>
-                  </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-blue-400 relative z-10">{feature.title}</h3>
-                <p className="text-gray-300 mb-6 text-lg relative z-10">{feature.description}</p>
-                
-                <div className="grid grid-cols-2 gap-3 relative z-10">
-                  {feature.capabilities.map((capability, capIndex) => (
-                    <ScrollReveal 
-                      key={capIndex}
-                      direction="left"
-                      className="flex items-center space-x-2 group-hover:translate-x-1 transition-all duration-300 relative"
-                    >
-                      <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 group-hover:animate-elastic-bounce transition-transform duration-300 animate-pulse relative">
-                        {/* Ripple effect */}
-                        <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+                  </ScrollReveal>
+                  
+                  {/* Text content (Right Side) */}
+                  <ScrollReveal direction="scale" delay={index * 150 + 200} className="flex-1">
+                    <div>
+                      <h3 className="text-2xl font-bold text-white mb-4 transition-colors duration-300 group-hover:text-blue-400">{feature.title}</h3>
+                      <p className="text-gray-300 mb-6 text-lg">{feature.description}</p>
+                      
+                      <div className="grid grid-cols-2 gap-3">
+                        {feature.capabilities.map((capability, capIndex) => (
+                          <div key={capIndex} className="flex items-center space-x-2 group-hover:translate-x-1 transition-all duration-300 relative">
+                            <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-125 group-hover:animate-elastic-bounce transition-transform duration-300 animate-pulse relative">
+                              {/* Ripple effect */}
+                              <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-0 group-hover:opacity-75"></div>
+                            </div>
+                            <span className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">{capability}</span>
+                          </div>
+                        ))}
                       </div>
-                      <span className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors duration-300">{capability}</span>
-                    </ScrollReveal>
-                  ))}
+                    </div>
+                  </ScrollReveal>
                 </div>
                 
                 {/* Interactive corner accent */}
@@ -126,7 +134,7 @@ const FeaturesSection = () => {
                   <div className={`w-full h-full bg-gradient-to-bl ${feature.gradient} opacity-10 rounded-bl-3xl`}></div>
                 </div>
               </div>
-            </AnimatedCard>
+            </ScrollReveal>
           ))}
         </div>
       </div>
