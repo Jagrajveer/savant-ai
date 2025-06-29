@@ -1,31 +1,34 @@
 import React from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface AnimatedCardProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
   bounceDelay?: number;
+  activeProgress?: number;
+  isActive?: boolean;
 }
 
 const AnimatedCard: React.FC<AnimatedCardProps> = ({ 
   children, 
   delay = 0, 
   className = '',
-  bounceDelay = 300
+  bounceDelay = 300,
+  activeProgress = 1,
+  isActive = true
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.001, rootMargin: '200px' });
+  // Calculate transform and opacity based on activeProgress
+  const translateY = (1 - activeProgress) * 40; // Slide up from bottom
+  const opacity = activeProgress;
+  const scale = 0.95 + (activeProgress * 0.05); // Subtle scale effect
 
   return (
     <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out transform ${
-        isVisible 
-          ? 'opacity-100 translate-y-0 scale-100' 
-          : 'opacity-0 translate-y-8 scale-95'
-      } ${className}`}
+      className={`transition-all duration-700 ease-out transform ${className}`}
       style={{
-        animation: isVisible ? `bounce-in-card 0.8s ease-out both` : undefined
+        opacity: opacity,
+        transform: `translate3d(0, ${translateY}px, 0) scale(${scale})`,
+        willChange: 'transform, opacity'
       }}
     >
       {children}
