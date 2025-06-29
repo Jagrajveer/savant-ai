@@ -9,7 +9,6 @@ const FeaturesSection = () => {
 
   const features = [
     {
-      number: "01",
       icon: Bot,
       title: "Voice AI",
       description: "AI-powered chat and phone agents that answer questions, qualify leads, and support customers — 24/7.",
@@ -19,7 +18,6 @@ const FeaturesSection = () => {
       imageUrl: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
-      number: "02",
       icon: Zap,
       title: "Task Automation",
       description: "Free your team from busywork like scheduling, follow-ups, and data entry.",
@@ -29,7 +27,6 @@ const FeaturesSection = () => {
       imageUrl: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
-      number: "03",
       icon: BarChart3,
       title: "Analytics & Insights",
       description: "Turn complex data into decisions with easy-to-read AI-powered dashboards.",
@@ -39,7 +36,6 @@ const FeaturesSection = () => {
       imageUrl: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600"
     },
     {
-      number: "04",
       icon: Puzzle,
       title: "Custom AI Solutions",
       description: "Got a unique use case? We'll build something just for your workflow.",
@@ -120,13 +116,6 @@ const FeaturesSection = () => {
                   ref={(el) => featureRefs.current[index] = el}
                   className="group min-h-[400px] flex flex-col justify-center"
                 >
-                  {/* Feature Number */}
-                  <ScrollReveal direction="left">
-                    <div className="text-6xl font-bold text-gray-500 mb-6 opacity-50">
-                      {feature.number}
-                    </div>
-                  </ScrollReveal>
-                  
                   {/* Icon and Title */}
                   <ScrollReveal direction="left" delay={100}>
                     <div className="flex items-center space-x-4 mb-8">
@@ -184,38 +173,17 @@ const FeaturesSection = () => {
                 <img 
                   src={features[activeFeatureIndex].imageUrl} 
                   alt={features[activeFeatureIndex].title}
-                  className="w-full h-full object-cover transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover animate-image-reveal"
                   key={activeFeatureIndex} // Force re-render for smooth transition
                 />
                 
                 {/* Image overlay effect */}
                 <div className={`absolute inset-0 bg-gradient-to-r ${features[activeFeatureIndex].gradient} opacity-20 transition-all duration-700`}></div>
                 
-                {/* Feature indicator */}
-                <div className="absolute top-6 left-6 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
-                  <span className="text-white font-semibold">
-                    {features[activeFeatureIndex].number}
-                  </span>
-                </div>
-                
                 {/* Floating accent */}
                 <div className="absolute -top-3 -right-3 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center animate-bounce shadow-lg">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
-              </div>
-              
-              {/* Progress indicators */}
-              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {features.map((_, index) => (
-                  <div 
-                    key={index}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === activeFeatureIndex 
-                        ? 'bg-blue-400 scale-125' 
-                        : 'bg-gray-600 hover:bg-gray-500'
-                    }`}
-                  />
-                ))}
               </div>
             </div>
           </div>
