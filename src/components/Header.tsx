@@ -26,7 +26,7 @@ const Header = () => {
         ? 'max-w-5xl backdrop-blur-md bg-gray-900/95' 
         : 'max-w-7xl backdrop-blur-sm bg-gray-900/80'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
