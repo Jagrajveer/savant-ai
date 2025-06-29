@@ -27,9 +27,13 @@ const Header = () => {
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out ${
         isScrolled ? 'max-w-5xl' : 'max-w-7xl'
       }`}>
-        <div className="flex items-center justify-between h-16">
+        <div className={`flex items-center justify-between h-16 transition-all duration-300 ease-in-out ${
+          isScrolled ? 'scale-x-[0.8] origin-center' : 'scale-x-100'
+        }`}>
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className={`flex items-center transition-all duration-300 ease-in-out ${
+            isScrolled ? 'space-x-1' : 'space-x-2'
+          }`}>
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">S</span>
             </div>
@@ -37,14 +41,18 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className={`hidden md:flex items-center transition-all duration-300 ease-in-out ${
+            isScrolled ? 'space-x-4' : 'space-x-8'
+          }`}>
             <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
             <a href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</a>
             <a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a>
           </nav>
 
           {/* Desktop CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className={`hidden md:flex items-center transition-all duration-300 ease-in-out ${
+            isScrolled ? 'space-x-2' : 'space-x-4'
+          }`}>
             <button className="text-blue-400 hover:text-blue-300 transition-colors">
               Watch Demo
             </button>
