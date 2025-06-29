@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
@@ -16,12 +17,7 @@ const Index = () => {
       <Header />
       <HeroSection />
       <ProblemSolutionSection />
-      
-      {/* Features Section Wrapper - Creates scroll space for sticky behavior */}
-      <div style={{ height: '400vh' }}>
-        <FeaturesSection />
-      </div>
-      
+      <FeaturesSection />
       <BeforeAfterSection />
       <ProcessSection />
       <IntegrationsSection />
