@@ -5,27 +5,60 @@ interface AnimatedCardProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
-  bounceDelay?: number;
+  hoverEffect?: 'lift' | 'scale' | 'glow' | 'none';
+  animationType?: 'fade' | 'slide' | 'scale' | 'bounce';
 }
 
 const AnimatedCard: React.FC<AnimatedCardProps> = ({ 
   children, 
   delay = 0, 
   className = '',
-  bounceDelay = 300
+  hoverEffect = 'lift',
+  animationType = 'slide'
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.001, rootMargin: '200px' });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.001, rootMargin: '100px' });
+
+  const getHoverClasses = () => {
+    switch (hoverEffect) {
+      case 'lift':
+        return 'hover:transform hover:-translate-y-2 hover:shadow-2xl';
+      case 'scale':
+        return 'hover:transform hover:scale-105';
+      case 'glow':
+        return 'hover:shadow-2xl hover:shadow-blue-500/25';
+      default:
+        return '';
+    }
+  };
+
+  const getAnimationClasses = () => {
+    const baseClasses = 'transition-all duration-500 ease-out';
+    
+    if (!isVisible) {
+      switch (animationType) {
+        case 'fade':
+          return `${baseClasses} opacity-0`;
+        case 'slide':
+          return `${baseClasses} opacity-0 translate-y-8 scale-95`;
+        case 'scale':
+          return `${baseClasses} opacity-0 scale-90`;
+        case 'bounce':
+          return `${baseClasses} opacity-0 translate-y-8 scale-95`;
+        default:
+          return `${baseClasses} opacity-0 translate-y-8 scale-95`;
+      }
+    }
+
+    return `${baseClasses} opacity-100 translate-y-0 scale-100`;
+  };
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out transform ${
-        isVisible 
-          ? 'opacity-100 translate-y-0 scale-100' 
-          : 'opacity-0 translate-y-8 scale-95'
-      } ${className}`}
+      className={`${getAnimationClasses()} ${getHoverClasses()} ${className}`}
       style={{
-        animation: isVisible ? `bounce-in-card 0.8s ease-out both` : undefined
+        transitionDelay: `${delay}ms`,
+        willChange: 'transform, opacity'
       }}
     >
       {children}

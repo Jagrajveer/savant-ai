@@ -2,6 +2,7 @@ import React from 'react';
 import { MessageCircle, Settings, Rocket, Users, Clock, TrendingUp, CheckCircle, Sparkles } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCard from './AnimatedCard';
+import { useStaggeredAnimation } from '../hooks/useScrollAnimation';
 
 const ProcessSection = () => {
   const processSteps = [
@@ -37,6 +38,8 @@ const ProcessSection = () => {
     }
   ];
 
+  const { ref: staggerRef, visibleItems } = useStaggeredAnimation(processSteps.length, 200);
+
   return (
     <section id="how-it-works" className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
       {/* Enhanced Background Tech Pattern */}
@@ -63,65 +66,70 @@ const ProcessSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Process Steps */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        {/* Process Steps with enhanced staggered animation */}
+        <div ref={staggerRef} className="grid md:grid-cols-3 gap-8 mb-12">
           {processSteps.map((step, index) => (
-            <ScrollReveal key={index} direction="up">
-              <AnimatedCard className="text-center group relative">
-                {/* Connection line to next step */}
-                {index < processSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-10 -right-4 w-8 h-px bg-gradient-to-r from-slate-400/40 to-transparent animate-data-flow-smooth" style={{ animationDelay: `${index * 500}ms` }}></div>
-                )}
-                
-                <div className="relative mb-8">
-                  <div className={`w-24 h-24 bg-gradient-to-r ${step.gradient} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-500 animate-float-smooth animate-circuit-pulse-smooth relative overflow-hidden`} style={{ animationDelay: `${index * 1000}ms` }}>
-                    {/* Animated background glow */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${step.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}></div>
-                    
-                    {/* Primary icon */}
-                    <step.icon className="w-10 h-10 text-white transition-all duration-500 group-hover:rotate-12 relative z-10" />
-                    
-                    {/* Secondary floating icons */}
-                    {step.secondaryIcons.map((SecondaryIcon, iconIndex) => (
-                      <div key={iconIndex} className={`absolute ${iconIndex === 0 ? '-top-1 -right-1' : '-bottom-1 -left-1'} opacity-0 group-hover:opacity-100 transition-all duration-500`} style={{ transitionDelay: `${iconIndex * 200}ms` }}>
-                        <SecondaryIcon className={`w-4 h-4 text-${step.color}-300 animate-bounce`} style={{ animationDelay: `${iconIndex * 300}ms` }} />
-                      </div>
-                    ))}
-                    
-                    {/* Orbiting particles */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                      <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
-                      <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
+            <div
+              key={index}
+              className={`text-center group relative transition-all duration-500 ease-out ${
+                visibleItems[index] 
+                  ? 'opacity-100 translate-y-0 scale-100' 
+                  : 'opacity-0 translate-y-8 scale-95'
+              }`}
+            >
+              {/* Connection line to next step */}
+              {index < processSteps.length - 1 && (
+                <div className="hidden md:block absolute top-10 -right-4 w-8 h-px bg-gradient-to-r from-slate-400/40 to-transparent animate-data-flow-smooth" style={{ animationDelay: `${index * 500}ms` }}></div>
+              )}
+              
+              <div className="relative mb-8">
+                <div className={`w-24 h-24 bg-gradient-to-r ${step.gradient} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-all duration-500 animate-float-smooth animate-circuit-pulse-smooth relative overflow-hidden`} style={{ animationDelay: `${index * 1000}ms` }}>
+                  {/* Animated background glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${step.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}></div>
+                  
+                  {/* Primary icon */}
+                  <step.icon className="w-10 h-10 text-white transition-all duration-500 group-hover:rotate-12 relative z-10" />
+                  
+                  {/* Secondary floating icons */}
+                  {step.secondaryIcons.map((SecondaryIcon, iconIndex) => (
+                    <div key={iconIndex} className={`absolute ${iconIndex === 0 ? '-top-1 -right-1' : '-bottom-1 -left-1'} opacity-0 group-hover:opacity-100 transition-all duration-500`} style={{ transitionDelay: `${iconIndex * 200}ms` }}>
+                      <SecondaryIcon className={`w-4 h-4 text-${step.color}-300 animate-bounce`} style={{ animationDelay: `${iconIndex * 300}ms` }} />
                     </div>
-                  </div>
-                  <div className={`absolute -top-3 -right-3 w-10 h-10 bg-${step.color}-600 rounded-full flex items-center justify-center group-hover:scale-125 transition-transform duration-300 animate-pulse border-2 border-${step.color}-500`} style={{ animationDelay: `${index * 200}ms` }}>
-                    <span className="text-white text-lg font-bold">{step.number}</span>
-                  </div>
-                </div>
-                
-                <h3 className={`text-2xl font-bold text-white mb-4 group-hover:text-${step.color}-400 transition-colors duration-300`}>{step.title}</h3>
-                <p className="text-gray-300 mb-6 group-hover:text-gray-200 transition-colors duration-300">{step.description}</p>
-                
-                <div className={`text-${step.color}-400 text-sm group-hover:translate-y-1 transition-transform duration-300`}>
-                  {step.features.map((feature, featureIndex) => (
-                    <ScrollReveal key={featureIndex} direction="up">
-                      <div className="flex items-center justify-center space-x-2 mb-2 group/feature hover:scale-105 transition-transform duration-300">
-                        <CheckCircle className="w-4 h-4 group-hover/feature:animate-elastic-bounce" />
-                        <span className="group-hover/feature:font-semibold transition-all duration-300">{feature}</span>
-                      </div>
-                    </ScrollReveal>
                   ))}
+                  
+                  {/* Orbiting particles */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+                    <div className="absolute bottom-0 right-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-300"></div>
+                    <div className="absolute left-0 top-1/2 w-1 h-1 bg-white rounded-full animate-ping delay-500"></div>
+                  </div>
                 </div>
-              </AnimatedCard>
-            </ScrollReveal>
+                <div className={`absolute -top-3 -right-3 w-10 h-10 bg-${step.color}-600 rounded-full flex items-center justify-center group-hover:scale-125 transition-transform duration-300 animate-pulse border-2 border-${step.color}-500`} style={{ animationDelay: `${index * 200}ms` }}>
+                  <span className="text-white text-lg font-bold">{step.number}</span>
+                </div>
+              </div>
+              
+              <h3 className={`text-2xl font-bold text-white mb-4 group-hover:text-${step.color}-400 transition-colors duration-300`}>{step.title}</h3>
+              <p className="text-gray-300 mb-6 group-hover:text-gray-200 transition-colors duration-300">{step.description}</p>
+              
+              <div className={`text-${step.color}-400 text-sm group-hover:translate-y-1 transition-transform duration-300`}>
+                {step.features.map((feature, featureIndex) => (
+                  <ScrollReveal key={featureIndex} direction="up" delay={featureIndex * 100}>
+                    <div className="flex items-center justify-center space-x-2 mb-2 group/feature hover:scale-105 transition-transform duration-300">
+                      <CheckCircle className="w-4 h-4 group-hover/feature:animate-elastic-bounce" />
+                      <span className="group-hover/feature:font-semibold transition-all duration-300">{feature}</span>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 
         {/* Enhanced Timeline Badge */}
         <ScrollReveal direction="scale">
           <div className="text-center">
-            <AnimatedCard>
+            <AnimatedCard hoverEffect="glow">
               <div className="inline-flex items-center space-x-3 glass text-slate-300 px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 hover:shadow-lg border border-gray-600 group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative">
