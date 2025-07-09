@@ -110,18 +110,6 @@ const DemoCall = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Testimonial */}
-              <div className="bg-gradient-to-r from-slate-800 to-gray-800 rounded-2xl p-8 text-white animate-fade-in-up hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-slate-700/50 backdrop-blur-sm">
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-2xl">✓</span>
-                  <span className="font-semibold">Client Success Story</span>
-                </div>
-                <blockquote className="text-lg mb-4">
-                  "The team helped us cut our scheduling time by 90% — from 4+ hours to just 20 minutes per week."
-                </blockquote>
-                <div className="text-slate-400">— Service Business Owner</div>
-              </div>
             </div>
           </div>
         </div>
