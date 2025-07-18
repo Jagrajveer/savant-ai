@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MessageCircle, Bot, Brain, Sparkles } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCard from './AnimatedCard';
