@@ -11,23 +11,23 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">S</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">Dr</span>
               </div>
-              <span className="text-xl font-bold">SavantAI</span>
+              <span className="text-xl font-bold">Dr.AI</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-sm">
-              Transform your business with intelligent automation. We help growing companies save time, reduce costs, and scale efficiently through custom AI solutions.
+              We develop custom AI solutions for your companies. Transform your business with intelligent automation and cutting-edge technology.
             </p>
           </div>
 
           {/* Product Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Product</h4>
+            <h4 className="text-lg font-semibold mb-6">Services</h4>
             <nav className="space-y-3">
-              <a href="#features" className="block text-gray-400 hover:text-white transition-colors">Features</a>
-              <a href="#how-it-works" className="block text-gray-400 hover:text-white transition-colors">How It Works</a>
-              <button className="block text-gray-400 hover:text-white transition-colors text-left">Demo</button>
+              <a href="#services" className="block text-gray-400 hover:text-white transition-colors">Services</a>
+              <a href="#process" className="block text-gray-400 hover:text-white transition-colors">Process</a>
+              <a href="#pricing" className="block text-gray-400 hover:text-white transition-colors">Pricing</a>
             </nav>
           </div>
 
@@ -35,23 +35,23 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Company</h4>
             <nav className="space-y-3">
-              <a href="#about" className="block text-gray-400 hover:text-white transition-colors">About Us</a>
-              <a href="#" className="block text-gray-400 hover:text-white transition-colors">Blog</a>
+              <a href="#faq" className="block text-gray-400 hover:text-white transition-colors">FAQ</a>
+              <a href="#contact" className="block text-gray-400 hover:text-white transition-colors">Contact</a>
             </nav>
           </div>
         </div>
 
         {/* Bottom CTA */}
         <div className="border-t border-gray-800 pt-8">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">Ready to Automate Your Business?</h3>
-            <p className="text-blue-100 mb-6">Book your free 15-minute strategy call now</p>
+          <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Business?</h3>
+            <p className="text-purple-100 mb-6">Get in touch with our AI experts today</p>
             <Link 
               to="/demo-call"
-              className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center space-x-2"
+              className="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center space-x-2"
             >
-              <span>📅</span>
-              <span>Book Free Strategy Call</span>
+              <span>💬</span>
+              <span>Contact Us</span>
               <span>→</span>
             </Link>
           </div>

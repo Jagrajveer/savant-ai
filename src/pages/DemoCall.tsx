@@ -62,50 +62,50 @@ const DemoCall = () => {
             <div className="animate-fade-in-up">
               {/* Badge */}
               <div className="inline-flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm text-blue-400 px-4 py-2 rounded-full mb-8 animate-scale-in border border-slate-700/50">
-                <span className="text-sm">📅 15-Minute Strategy Call</span>
+                <span className="text-sm">💬 Get in Touch</span>
               </div>
 
               {/* Header */}
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in-up">
-                Book Your Free <span className="bg-gradient-to-r from-blue-400 to-slate-400 bg-clip-text text-transparent animate-gradient-shift">AI Strategy Call</span>
+                Contact <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent animate-gradient-shift">Dr.AI</span>
               </h1>
               
               <p className="text-xl text-gray-300 mb-12 animate-fade-in-up">
-                Get a custom automation roadmap and see exactly how AI can transform your business operations.
+                Get in touch with our AI experts to discuss your custom AI solution needs.
               </p>
 
               {/* What You'll Get */}
               <div className="space-y-8 mb-12 animate-fade-in-up">
-                <h3 className="text-2xl font-bold text-white">What You'll Get</h3>
+                <h3 className="text-2xl font-bold text-white">How We Can Help</h3>
                 
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4 group hover:translate-x-2 transition-all duration-300 animate-bounce-fade-in">
-                    <div className="w-12 h-12 bg-gradient-to-r from-slate-700 to-slate-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border border-slate-600/50">
-                      <span className="text-blue-400">⏰</span>
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-700 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border border-purple-600/50">
+                      <span className="text-purple-400">🔍</span>
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">15-Minute Workflow Audit</h4>
-                      <p className="text-gray-300">We'll analyze your current processes and identify the highest-impact automation opportunities.</p>
+                      <h4 className="text-lg font-semibold text-white mb-2">Business Analysis</h4>
+                      <p className="text-gray-300">We analyze your workflows to identify high-impact AI opportunities for your business.</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-4 group hover:translate-x-2 transition-all duration-300 animate-bounce-fade-in">
-                    <div className="w-12 h-12 bg-gradient-to-r from-slate-700 to-slate-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border border-slate-600/50">
-                      <span className="text-slate-400">📈</span>
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-700 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border border-blue-600/50">
+                      <span className="text-blue-400">⚙️</span>
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Custom AI Roadmap</h4>
-                      <p className="text-gray-300">Get a tailored plan showing exactly how AI can streamline your specific business operations.</p>
+                      <h4 className="text-lg font-semibold text-white mb-2">Custom AI Solutions</h4>
+                      <p className="text-gray-300">We build tailored AI solutions prioritizing quality and security at every step.</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start space-x-4 group hover:translate-x-2 transition-all duration-300 animate-bounce-fade-in">
-                    <div className="w-12 h-12 bg-gradient-to-r from-slate-700 to-slate-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border border-slate-600/50">
-                      <span className="text-gray-400">⚡</span>
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-700 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border border-purple-600/50">
+                      <span className="text-purple-400">🚀</span>
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Quick Implementation Timeline</h4>
-                      <p className="text-gray-300">Learn how we can have your first automation live in as little as 7 days.</p>
+                      <h4 className="text-lg font-semibold text-white mb-2">Ongoing Support</h4>
+                      <p className="text-gray-300">We deliver ongoing maintenance and performance enhancements to maximize your AI investment.</p>
                     </div>
                   </div>
                 </div>
