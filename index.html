@@ -1,26 +1,992 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SavantAI - Custom AI Automation for Growing Businesses</title>
-    <meta name="description" content="Transform your business with intelligent AI automation. Save time, cut costs, and scale efficiently with custom AI solutions built for your workflows." />
-    <meta name="author" content="SavantAI" />
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Savant AI — Stop Losing Jobs While You're On The Job</title>
+<meta name="description" content="Done-for-you follow-up automation for home service contractors. Recover missed calls, dead quotes, and missing reviews — automatically." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+<style>
+  :root{
+    --bg:        #0A0A0F;
+    --bg-2:      #0E0E15;
+    --panel:     #12121C;
+    --panel-2:   #171724;
+    --line:      #1F1F2E;
+    --line-2:    #2A2A3D;
+    --ink:       #ECECF1;
+    --ink-2:     #B7B7C6;
+    --ink-3:     #7A7A8E;
+    --ink-4:     #4A4A5C;
+    --accent:    #00FF87;
+    --accent-d:  #00C76A;
+    --accent-glow: 0 0 0 1px rgba(0,255,135,.25), 0 10px 40px -10px rgba(0,255,135,.45);
+    --radius:    14px;
+    --radius-sm: 8px;
+    --maxw:      1200px;
+    --pad:       clamp(20px, 4vw, 40px);
+    --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
 
-    <meta property="og:title" content="SavantAI - Custom AI Automation for Growing Businesses" />
-    <meta property="og:description" content="Transform your business with intelligent AI automation. Save time, cut costs, and scale efficiently with custom AI solutions built for your workflows." />
-    <meta property="og:type" content="website" />
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent); color:#04140A}
+  a{color:inherit; text-decoration:none}
+  button{font-family:inherit; cursor:pointer; border:0; background:transparent; color:inherit}
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@savantai" />
-    
-    <!-- Remove favicon to prevent Lovable icon from showing -->
-    <link rel="icon" href="data:,">
-  </head>
+  /* ---------- Layout ---------- */
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad)}
+  section{position:relative; padding:clamp(80px, 11vw, 140px) 0; border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  /* ---------- Backdrop ---------- */
+  .backdrop{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 80% -10%, rgba(0,255,135,.06), transparent 60%),
+      radial-gradient(700px 500px at -10% 30%, rgba(0,255,135,.04), transparent 60%),
+      var(--bg);
+  }
+  .grid-overlay{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 80%);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: color-mix(in oklab, var(--bg) 75%, transparent);
+    border-bottom:1px solid transparent;
+    transition: border-color .25s ease, background .25s ease;
+  }
+  .nav.scrolled{ border-bottom-color: var(--line) }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .nav-links{
+    display:flex; gap:28px; align-items:center;
+    font-size:14px; color:var(--ink-2);
+  }
+  .nav-links a{ transition: color .15s ease }
+  .nav-links a:hover{ color:var(--ink) }
+  @media (max-width: 720px){ .nav-links{ display:none } }
+
+  /* ---------- Wordmark ---------- */
+  .wordmark{
+    display:inline-flex; align-items:center; gap:10px;
+    font-weight:600; letter-spacing:-0.01em; font-size:17px;
+    color:var(--ink);
+  }
+  .wordmark .mark{
+    width:24px; height:24px; display:inline-block;
+    position:relative;
+  }
+  .wordmark .mark svg{ width:100%; height:100% ; display:block }
+  .wordmark .dot{ color:var(--accent); }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    height:46px; padding:0 20px;
+    border-radius:999px;
+    font-weight:500; font-size:15px;
+    letter-spacing:-0.005em;
+    transition: transform .12s ease, background .15s ease, color .15s ease, box-shadow .2s ease, border-color .15s ease;
+    white-space:nowrap;
+  }
+  .btn:active{ transform: translateY(1px) }
+  .btn-primary{
+    background:var(--accent); color:#04140A;
+    box-shadow: 0 0 0 1px rgba(0,255,135,.2), 0 10px 30px -8px rgba(0,255,135,.5);
+  }
+  .btn-primary:hover{ background:#1cff96; box-shadow: 0 0 0 1px rgba(0,255,135,.4), 0 14px 36px -8px rgba(0,255,135,.7) }
+  .btn-ghost{
+    background:transparent; color:var(--ink);
+    border:1px solid var(--line-2);
+  }
+  .btn-ghost:hover{ border-color: var(--ink-3); background:rgba(255,255,255,.02) }
+  .btn .arrow{
+    display:inline-block; transition: transform .18s ease;
+  }
+  .btn:hover .arrow{ transform: translateX(3px) }
+
+  .btn-sm{ height:38px; padding:0 16px; font-size:14px }
+
+  /* ---------- Eyebrow / pill ---------- */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono);
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent);
+  }
+  .eyebrow::before{
+    content:""; width:6px; height:6px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 12px var(--accent);
+  }
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3{ margin:0; letter-spacing:-0.025em; line-height:1.05 }
+  h1{ font-size: clamp(40px, 7.2vw, 84px); font-weight:600; text-wrap:balance }
+  h2{ font-size: clamp(30px, 4.6vw, 52px); font-weight:600; text-wrap:balance }
+  h3{ font-size: 20px; font-weight:600; letter-spacing:-0.015em }
+  .lede{
+    font-size: clamp(17px, 1.6vw, 20px);
+    color:var(--ink-2);
+    max-width: 720px;
+    text-wrap:pretty;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top: clamp(80px, 12vw, 140px);
+    padding-bottom: clamp(100px, 14vw, 180px);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0; pointer-events:none;
+    overflow:hidden;
+  }
+  .hero-bg::before{
+    content:"";
+    position:absolute; inset:-1px;
+    background:
+      radial-gradient(60% 80% at 50% 100%, rgba(0,255,135,.10), transparent 70%);
+  }
+  .pulse-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(to right, rgba(0,255,135,.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,255,135,.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 100%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 100%, #000 20%, transparent 75%);
+    opacity:.55;
+  }
+  .pulse-grid::after{
+    content:"";
+    position:absolute; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    filter: blur(1px);
+    opacity:.6;
+    animation: scan 7s linear infinite;
+  }
+  @keyframes scan {
+    0%{ top: -2px; opacity:0 }
+    8%{ opacity:.7 }
+    92%{ opacity:.7 }
+    100%{ top: 100%; opacity:0 }
+  }
+  /* circuit traces */
+  .traces{
+    position:absolute; inset:0; opacity:.4;
+    mix-blend-mode: screen;
+  }
+  .traces path{
+    stroke: var(--accent); stroke-width:1; fill:none;
+    stroke-dasharray: 4 8;
+    animation: dash 18s linear infinite;
+    opacity:.35;
+  }
+  .traces path.fast{ animation-duration: 9s; opacity:.5 }
+  @keyframes dash { to { stroke-dashoffset: -240 } }
+  .traces .node{
+    fill: var(--accent);
+  }
+
+  .hero-inner{ position:relative; z-index:1 }
+  .hero h1 strong{
+    color: var(--accent);
+    font-weight:inherit;
+    text-shadow: 0 0 30px rgba(0,255,135,.35);
+  }
+  .hero .lede{ margin-top: 24px; font-size: clamp(17px, 1.7vw, 21px) }
+  .hero-ctas{
+    margin-top: 40px;
+    display:flex; gap:12px; flex-wrap:wrap;
+  }
+  .hero-meta{
+    margin-top: 56px;
+    display:flex; gap:32px; flex-wrap:wrap;
+    font-family:var(--font-mono); font-size:12px;
+    color:var(--ink-3);
+    letter-spacing:0.06em; text-transform:uppercase;
+  }
+  .hero-meta span{ display:inline-flex; align-items:center; gap:8px }
+  .hero-meta span::before{
+    content:""; width:6px; height:6px; border-radius:50%;
+    background: var(--accent); opacity:.7;
+    box-shadow:0 0 8px var(--accent);
+  }
+
+  /* ---------- Section header ---------- */
+  .sec-head{ max-width: 820px; margin-bottom: clamp(48px, 6vw, 72px) }
+  .sec-head h2{ margin-top: 18px }
+  .sec-head .lede{ margin-top: 20px }
+
+  /* ---------- Problem cards ---------- */
+  .cards-3{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 960px){ .cards-3{ grid-template-columns: 1fr } }
+  .pain-card{
+    position:relative;
+    background: var(--panel);
+    border:1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px 30px;
+    display:flex; flex-direction:column; gap:18px;
+    transition: border-color .2s ease, transform .2s ease, background .2s ease;
+  }
+  .pain-card:hover{ border-color: var(--line-2); background: var(--panel-2) }
+  .pain-icon{
+    width:44px; height:44px; border-radius:10px;
+    border:1px solid var(--line-2);
+    background: rgba(0,255,135,.04);
+    display:grid; place-items:center;
+    color: var(--accent);
+  }
+  .pain-icon svg{ width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.5 }
+  .pain-stat{
+    font-family:var(--font-mono);
+    font-size: clamp(28px, 3.4vw, 36px);
+    font-weight:500;
+    color: var(--ink);
+    letter-spacing:-0.02em;
+    line-height:1.1;
+  }
+  .pain-stat .accent{ color: var(--accent) }
+  .pain-card h3{ color: var(--ink) }
+  .pain-card p{ color: var(--ink-2); margin:0; font-size:15px }
+  .pain-card .tag{
+    font-family: var(--font-mono); font-size:11px; letter-spacing:0.12em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ---------- How it works ---------- */
+  .steps{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    counter-reset: step;
+  }
+  @media (max-width: 960px){ .steps{ grid-template-columns: 1fr } }
+  .step{
+    position:relative;
+    background:
+      linear-gradient(180deg, rgba(0,255,135,.03), transparent 60%),
+      var(--panel);
+    border:1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    display:flex; flex-direction:column; gap:14px;
+    transition: border-color .2s ease;
+    overflow:hidden;
+  }
+  .step:hover{ border-color: var(--line-2) }
+  .step::before{
+    counter-increment: step;
+    content: "0" counter(step);
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing:0.16em;
+    color: var(--accent);
+    opacity:.9;
+  }
+  .step h3{ font-size: 22px; margin-top: 4px }
+  .step .flow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--ink-3); letter-spacing: 0.06em;
+    padding: 6px 10px;
+    border:1px solid var(--line);
+    border-radius: 999px;
+    width:fit-content;
+    margin-top:4px;
+  }
+  .step .flow .a{ color: var(--ink) }
+  .step .flow .arr{ color: var(--accent) }
+  .step p{ color: var(--ink-2); margin:0; font-size:15px }
+
+  /* ---------- Demo / phone ---------- */
+  .demo-wrap{
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items:center;
+  }
+  @media (max-width: 900px){ .demo-wrap{ grid-template-columns: 1fr } }
+
+  .phone{
+    position:relative;
+    width: 340px; max-width: 100%;
+    margin: 0 auto;
+    aspect-ratio: 9 / 18.5;
+    background: linear-gradient(180deg, #16161F, #0C0C12);
+    border-radius: 44px;
+    border:1px solid var(--line-2);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.03) inset,
+      0 30px 60px -20px rgba(0,0,0,.6),
+      0 0 80px -20px rgba(0,255,135,.15);
+    padding: 14px;
+    overflow:hidden;
+  }
+  .phone .screen{
+    position:relative;
+    background: #07070C;
+    border-radius: 32px;
+    height:100%;
+    overflow:hidden;
+    border: 1px solid #1B1B27;
+    display:flex; flex-direction:column;
+  }
+  .phone .notch{
+    position:absolute; top:8px; left:50%; transform:translateX(-50%);
+    width: 100px; height: 24px; border-radius: 14px;
+    background: #050509;
+    z-index:3;
+  }
+  .phone-header{
+    padding: 38px 16px 12px;
+    border-bottom: 1px solid #14141E;
+    display:flex; align-items:center; gap:10px;
+    background: linear-gradient(180deg, #0C0C14, transparent);
+  }
+  .avatar{
+    width:30px; height:30px; border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, #00FF87, #00794a);
+    display:grid; place-items:center;
+    color:#04140A; font-weight:700; font-size:13px;
+    box-shadow: 0 0 12px rgba(0,255,135,.3);
+  }
+  .phone-header .who{ font-size:13px; font-weight:600 }
+  .phone-header .sub{ font-size:11px; color:var(--ink-3); font-family:var(--font-mono) }
+  .signal-dot{
+    width:6px; height:6px; border-radius:50%; background:var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    margin-left:auto;
+  }
+  .chat{
+    flex:1;
+    padding: 14px 12px;
+    display:flex; flex-direction:column; gap:10px;
+    overflow:hidden;
+    font-size:13px;
+  }
+  .chat .timestamp{
+    text-align:center; font-size:10px; color: var(--ink-4);
+    font-family: var(--font-mono); letter-spacing:0.08em;
+    text-transform: uppercase;
+    margin: 4px 0 0;
+  }
+  .chat .missed{
+    align-self:center;
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11px; color:#FF6B6B;
+    background: rgba(255,107,107,.08);
+    border: 1px solid rgba(255,107,107,.18);
+    padding: 6px 10px; border-radius: 999px;
+    font-family:var(--font-mono);
+  }
+  .bubble{
+    max-width: 78%;
+    padding: 9px 12px;
+    border-radius: 16px;
+    line-height:1.4;
+    font-size: 13px;
+    word-wrap: break-word;
+    opacity:0;
+    transform: translateY(8px);
+    animation: pop .5s ease forwards;
+  }
+  .bubble.them{
+    align-self:flex-start;
+    background: #161623;
+    color: #E4E4EC;
+    border:1px solid #1F1F2E;
+    border-bottom-left-radius: 4px;
+  }
+  .bubble.you{
+    align-self:flex-end;
+    background: linear-gradient(180deg, #00FF87, #00C76A);
+    color: #04140A;
+    border-bottom-right-radius: 4px;
+    font-weight:500;
+  }
+  .bubble .link{ text-decoration:underline; opacity:.85 }
+  @keyframes pop{ to{ opacity:1; transform: translateY(0) } }
+  .typing{
+    align-self:flex-start;
+    background: #161623; border:1px solid #1F1F2E;
+    padding: 10px 14px; border-radius: 16px; border-bottom-left-radius:4px;
+    display:inline-flex; gap:4px;
+  }
+  .typing span{
+    width:5px; height:5px; border-radius:50%; background: var(--ink-3);
+    animation: blink 1.2s infinite;
+  }
+  .typing span:nth-child(2){ animation-delay: .2s }
+  .typing span:nth-child(3){ animation-delay: .4s }
+  @keyframes blink{ 0%,60%,100%{opacity:.2} 30%{opacity:1} }
+
+  .demo-side .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family: var(--font-mono); font-size:11px;
+    letter-spacing:0.1em; text-transform: uppercase;
+    border:1px dashed var(--line-2);
+    padding: 6px 12px; border-radius: 999px;
+    color: var(--ink-2);
+    margin-bottom: 18px;
+  }
+  .demo-side .badge::before{
+    content:""; width:8px; height:8px; border-radius:50%; background:var(--accent);
+    animation: bpulse 2s ease infinite;
+  }
+  @keyframes bpulse{ 0%,100%{ transform:scale(1); opacity:.6 } 50%{ transform:scale(1.3); opacity:1 } }
+  .demo-side h2{ margin-bottom: 16px }
+  .demo-side ul{
+    list-style:none; padding:0; margin: 28px 0 0;
+    display:grid; gap:14px; max-width: 460px;
+  }
+  .demo-side li{
+    display:flex; gap:14px; align-items:flex-start;
+    color: var(--ink-2); font-size:15px;
+  }
+  .demo-side li .num{
+    flex:none;
+    font-family:var(--font-mono); font-size:11px;
+    color:var(--accent);
+    width:22px; height:22px; border-radius:6px;
+    background:rgba(0,255,135,.07);
+    border:1px solid rgba(0,255,135,.2);
+    display:grid; place-items:center;
+    margin-top:1px;
+  }
+  .replay-row{ margin-top: 28px; display:flex; gap:12px; flex-wrap:wrap }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid{
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 820px){ .pricing-grid{ grid-template-columns: 1fr } }
+  .price-card{
+    position:relative;
+    background: var(--panel);
+    border:1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    display:flex; flex-direction:column;
+  }
+  .price-card.featured{
+    background:
+      linear-gradient(180deg, rgba(0,255,135,.06), transparent 50%),
+      var(--panel);
+    border-color: rgba(0,255,135,.25);
+  }
+  .price-card .label{
+    font-family: var(--font-mono); font-size:11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .price-card.featured .label{ color: var(--accent) }
+  .price-card h3{ font-size: 22px; margin-top: 8px }
+  .price{
+    display:flex; align-items:baseline; gap:8px;
+    margin: 20px 0 6px;
+  }
+  .price .num{
+    font-family: var(--font-mono);
+    font-size: clamp(36px, 4.4vw, 48px);
+    font-weight:500; letter-spacing:-0.02em;
+    color: var(--ink);
+  }
+  .price .per{ color: var(--ink-3); font-size: 15px; font-family: var(--font-mono) }
+  .price-sub{ color: var(--ink-3); font-size: 13px; font-family: var(--font-mono) }
+  .price-card ul{
+    list-style:none; padding:0; margin: 28px 0 0;
+    display:grid; gap:12px;
+  }
+  .price-card li{
+    display:flex; gap:12px; color: var(--ink-2); font-size:15px;
+    align-items:flex-start;
+  }
+  .price-card li svg{
+    flex:none; width:18px; height:18px; margin-top:3px;
+    color: var(--accent);
+  }
+  .pricing-note{
+    margin-top: 36px;
+    text-align:center;
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--ink-3);
+    max-width: 640px; margin-left:auto; margin-right:auto;
+  }
+  .pricing-note .accent{ color: var(--accent) }
+  .price-link{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top: auto; padding-top: 28px;
+    font-size: 14px; color: var(--accent);
+    transition: gap .15s ease, color .15s ease;
+    cursor:pointer;
+  }
+  .price-link:hover{ gap:12px; color: #1cff96 }
+  .price-link .arrow{ transition: transform .18s ease }
+  .price-link:hover .arrow{ transform: translateX(3px) }
+  .pricing-cta{
+    margin-top: 24px;
+    display:flex; justify-content:center;
+  }
+  .pricing-cta .btn{ height: 52px; padding: 0 26px; font-size: 15px }
+
+  /* ---------- CTA ---------- */
+  .cta-section{
+    position:relative;
+    text-align:center;
+    overflow:hidden;
+  }
+  .cta-section .wrap{ position:relative; z-index:1 }
+  .cta-section .accent-line{
+    position:absolute; left:50%; top:0;
+    width: 1px; height: 80px;
+    background: linear-gradient(180deg, transparent, var(--accent));
+    transform: translateX(-50%);
+    opacity:.6;
+  }
+  .cta-section h2{ max-width: 800px; margin: 0 auto }
+  .cta-section .lede{ margin: 22px auto 36px }
+  .cta-section .btn{ height: 56px; padding: 0 28px; font-size: 16px }
+  .cta-fineprint{
+    margin-top: 22px;
+    color: var(--ink-3); font-size: 13px; font-family: var(--font-mono);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 56px 0 40px;
+  }
+  .foot{
+    display:grid; grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 760px){ .foot{ grid-template-columns: 1fr } }
+  .foot .tagline{ color: var(--ink-3); font-size:14px; margin-top: 12px; max-width: 280px }
+  .foot h4{
+    font-size: 12px; font-family: var(--font-mono);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .foot a, .foot p{ color: var(--ink-2); font-size: 14px; margin: 0; line-height: 1.9 }
+  .foot a:hover{ color: var(--accent) }
+  .foot-bot{
+    border-top:1px solid var(--line);
+    margin-top: 48px; padding-top: 24px;
+    display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-size: 12px; color: var(--ink-3);
+    font-family: var(--font-mono); letter-spacing: 0.04em;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{ opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease }
+  .reveal.in{ opacity:1; transform: none }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important }
+    .pulse-grid::after{ display:none }
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop" aria-hidden="true"></div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="wordmark" aria-label="Savant AI home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <!-- minimal pulse/arc + node -->
+          <path d="M2 18 L8 18 L11 11 L14 25 L17 13 L20 18 L30 18"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="color: var(--accent)" />
+          <circle cx="20" cy="18" r="2.4" fill="currentColor" style="color: var(--accent)" />
+        </svg>
+      </span>
+      Savant<span class="dot">.</span>AI
+    </a>
+    <nav class="nav-links">
+      <a href="#problem">The problem</a>
+      <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
+      <a href="#pricing">Pricing</a>
+      <button class="btn btn-ghost btn-sm" data-book>Book a call</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="pulse-grid"></div>
+    <svg class="traces" viewBox="0 0 1600 800" preserveAspectRatio="none">
+      <path d="M0,640 L300,640 L340,600 L640,600 L680,560 L1000,560 L1040,520 L1600,520" />
+      <path class="fast" d="M0,140 L220,140 L260,180 L520,180 L560,220 L900,220 L940,260 L1600,260" />
+      <path d="M0,420 L180,420 L220,380 L420,380 L460,420 L820,420 L860,380 L1200,380 L1240,420 L1600,420" />
+      <circle class="node" cx="340" cy="600" r="3" />
+      <circle class="node" cx="1040" cy="520" r="3" />
+      <circle class="node" cx="560" cy="220" r="3" />
+      <circle class="node" cx="860" cy="380" r="3" />
+    </svg>
+  </div>
+
+  <div class="wrap hero-inner">
+    <div class="eyebrow">SAV-01 // FOLLOW-UP AUTOMATION FOR TRADES</div>
+    <h1 style="margin-top:18px;">
+      Stop losing jobs <br/>while you're <strong>on the job.</strong>
+    </h1>
+    <p class="lede">
+      Every missed call is a job someone else books. Every quote you forget to follow up on is money left on the table. Savant AI closes those gaps automatically — while you're working.
+    </p>
+    <div class="hero-ctas">
+      <a href="#how" class="btn btn-primary">See how it works <span class="arrow">→</span></a>
+      <button class="btn btn-ghost" data-book>Book a free call</button>
+    </div>
+    <div class="hero-meta" aria-hidden="true">
+      <span>HVAC</span><span>Plumbing</span><span>Roofing</span><span>Electrical</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">01 — The problem</div>
+      <h2>You're losing revenue<br/>you don't even know about.</h2>
+    </div>
+
+    <div class="cards-3">
+      <article class="pain-card reveal">
+        <div class="pain-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 7 C7 3, 17 3, 21 7 L18.5 9.5 a2 2 0 0 1 -2.5 0.3 L14 8.5 v-2 a14 14 0 0 0 -4 0 v2 L8 9.8 a2 2 0 0 1 -2.5 -0.3 Z"/><path d="M14.5 14.5 L20 20 M20 14.5 L14.5 20" stroke-linecap="round"/></svg>
+        </div>
+        <div class="tag">Missed calls</div>
+        <div class="pain-stat"><span class="accent">80%</span> of callers won't leave a voicemail.</div>
+        <p>They called. You were on a job. They heard your voicemail and hung up. Then called the next contractor on Google. 78% of customers hire whoever responds first — and it wasn't you.</p>
+      </article>
+
+      <article class="pain-card reveal">
+        <div class="pain-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 3 H15 L19 7 V21 H7 Z" stroke-linejoin="round"/><path d="M15 3 V7 H19" stroke-linejoin="round"/><path d="M10 11 H16 M10 14.5 H16 M10 18 H13.5" stroke-linecap="round" opacity=".5"/></svg>
+        </div>
+        <div class="tag">Dead quotes</div>
+        <div class="pain-stat">Up to <span class="accent">80%</span> of sales require 5+ follow-ups.</div>
+        <p>You sent the quote. They said they'd think about it. You forgot to follow up. They hired someone who did.</p>
+      </article>
+
+      <article class="pain-card reveal">
+        <div class="pain-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3 L14.5 9 L21 9.7 L16 14 L17.5 20.5 L12 17 L6.5 20.5 L8 14 L3 9.7 L9.5 9 Z" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="tag">Missing reviews</div>
+        <div class="pain-stat"><span class="accent">93%</span> of customers check reviews before hiring.</div>
+        <p>You did great work. They meant to leave a review. Life got in the way. Your competitor with 200 reviews keeps winning the Google search — even if your work is better.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">02 — How it works</div>
+      <h2>Three automations.<br/>Running 24/7. <span style="color:var(--ink-3)">Under $10/month in infrastructure.</span></h2>
+      <p class="lede">No apps for your clients to download. No CRM to learn. Works with your existing phone number.</p>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal">
+        <div class="flow"><span class="a">Missed call</span><span class="arr">→</span><span class="a">Instant SMS</span></div>
+        <h3>The second you miss a call, we text back.</h3>
+        <p>Your lead gets an automatic text: <em style="color:var(--ink); font-style:normal">"Hey, this is [Business Name] — sorry we missed you! We're on a job right now. Reply here or click to book a time."</em> Sent in under 60 seconds.</p>
+      </article>
+
+      <article class="step reveal">
+        <div class="flow"><span class="a">Quote sent</span><span class="arr">→</span><span class="a">Follow-up</span></div>
+        <h3>Quote follow-up sequence.</h3>
+        <p>When you send a quote and don't hear back, we follow up for you — automatically. Day 1, Day 3, Day 7. Friendly, professional, persistent. Most clients close on the second or third touch.</p>
+      </article>
+
+      <article class="step reveal">
+        <div class="flow"><span class="a">Job complete</span><span class="arr">→</span><span class="a">Review</span></div>
+        <h3>Review request the same day.</h3>
+        <p>Job done? Your customer gets a thank-you text and a direct link to leave a Google review. No awkward ask, no forgetting. Your review count grows automatically.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="wrap demo-wrap">
+    <div class="demo-side reveal">
+      <div class="badge">Demo · Live preview coming soon</div>
+      <div class="eyebrow">03 — See it in action</div>
+      <h2 style="margin-top:18px;">A missed call turns into a booked job — in under 60 seconds.</h2>
+      <ul>
+        <li><span class="num">1</span><span><strong style="color:var(--ink); font-weight:500">11:42 AM —</strong> Customer calls. You're under a furnace. Phone rings out.</span></li>
+        <li><span class="num">2</span><span><strong style="color:var(--ink); font-weight:500">11:42 AM —</strong> Savant AI sends an apology + booking link by SMS automatically.</span></li>
+        <li><span class="num">3</span><span><strong style="color:var(--ink); font-weight:500">11:44 AM —</strong> Customer self-books for the next available slot. You see it on your calendar.</span></li>
+      </ul>
+      <div class="replay-row">
+        <button class="btn btn-ghost btn-sm" id="replayBtn">↻ Replay conversation</button>
+      </div>
+    </div>
+
+    <div class="phone reveal" aria-label="SMS conversation preview">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="phone-header">
+          <div class="avatar">S</div>
+          <div>
+            <div class="who">Savant AI</div>
+            <div class="sub">+1 (204) ••• ••••</div>
+          </div>
+          <div class="signal-dot" title="Live"></div>
+        </div>
+        <div class="chat" id="chat">
+          <!-- populated by JS for replay -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center; margin-left:auto; margin-right:auto">
+      <div class="eyebrow" style="justify-content:center">04 — Cost vs. recovery</div>
+      <h2 style="margin-top:18px;">What it costs vs. what it recovers.</h2>
+      <p class="lede" style="margin-left:auto; margin-right:auto">The average missed call costs a home service business <span style="color:var(--ink)">$1,200</span> in lost revenue. This system pays for itself the first time it catches a job you would have lost.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <article class="price-card reveal">
+        <div class="label">One-time</div>
+        <h3>One-time setup</h3>
+        <p style="color:var(--ink-2); font-size:15px; margin:18px 0 0; max-width:42ch">We build, configure, and test your entire system — connected to your existing phone number. No tech skills required on your end.</p>
+        <a href="#book" class="price-link" data-book>Ask us what setup looks like for your trade <span class="arrow">→</span></a>
+      </article>
+
+      <article class="price-card featured reveal">
+        <div class="label">Monthly · ongoing</div>
+        <h3>Monthly retainer</h3>
+        <p style="color:var(--ink-2); font-size:15px; margin:18px 0 0; max-width:42ch">All three automations running 24/7. Messaging costs covered. Tweaks and support included. Cancel anytime.</p>
+        <a href="#book" class="price-link" data-book>Get a quote on your 30-minute call <span class="arrow">→</span></a>
+      </article>
+    </div>
+
+    <p class="pricing-note">Pricing is straightforward and discussed on your call. No surprise fees, no long-term contracts.</p>
+
+    <div class="pricing-cta reveal">
+      <button class="btn btn-primary" data-book>Book a free 30-minute call <span class="arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="book">
+  <div class="accent-line" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center">05 — Talk to us</div>
+    <h2 style="margin-top:18px;">Let's talk. 30 minutes. No pitch decks.</h2>
+    <p class="lede">
+      Tell us about your business. We'll show you exactly what the system looks like for your trade and your phone number. If it's not a fit, we'll tell you.
+    </p>
+    <button class="btn btn-primary" data-book>Book a free 30-minute call <span class="arrow">→</span></button>
+    <p class="cta-fineprint">Real humans · No automated qualifying · No upsell</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="wordmark">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M2 18 L8 18 L11 11 L14 25 L17 13 L20 18 L30 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent)"/>
+              <circle cx="20" cy="18" r="2.4" fill="currentColor" style="color: var(--accent)"/>
+            </svg>
+          </span>
+          Savant<span class="dot">.</span>AI
+        </a>
+        <p class="tagline">Automation for the trades.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="/cdn-cgi/l/email-protection#a8cbc7c6dcc9cbdce8dbc9dec9c6dcc9c186cbc9"><span class="__cf_email__" data-cfemail="ea8985849e8b899eaa998b9c8b849e8b83c4898b">[email&#160;protected]</span></a></p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <p><a href="#problem">The problem</a></p>
+        <p><a href="#how">How it works</a></p>
+        <p><a href="#pricing">Pricing</a></p>
+        <p><a href="#book">Book a call</a></p>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Savant AI. All rights reserved.</span>
+      <span>SAV-01 · v1.0</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Calendly widget script (lazy, only loaded on desktop click) -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ----- Nav scroll state -----
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ----- Reveal on scroll -----
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target) }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ----- Calendly booking -----
+  const CALENDLY_URL = 'https://calendly.com/jagrajveer9/30min';
+  const isMobile = () => window.matchMedia('(max-width: 760px)').matches || ('ontouchstart' in window && window.innerWidth < 900);
+
+  let calendlyLoaded = false;
+  function loadCalendly(){
+    return new Promise((resolve) => {
+      if(calendlyLoaded) return resolve();
+      const s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.async = true;
+      s.onload = () => { calendlyLoaded = true; resolve(); };
+      document.head.appendChild(s);
+    });
+  }
+  async function openBooking(){
+    if(isMobile()){
+      // direct redirect (same tab) on mobile
+      window.location.href = CALENDLY_URL;
+      return;
+    }
+    await loadCalendly();
+    if(window.Calendly && window.Calendly.initPopupWidget){
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank', 'noopener');
+    }
+  }
+  document.querySelectorAll('[data-book]').forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    openBooking();
+  }));
+
+  // ----- Demo chat replay -----
+  const chat = document.getElementById('chat');
+  const script = [
+    { t: 'time',  v: '11:42 AM' },
+    { t: 'miss',  v: 'Missed call — (204) 555-0183' },
+    { t: 'them',  delay: 250, v: '(no voicemail left)' , muted:true},
+    { t: 'time',  v: '11:42 AM' },
+    { t: 'you',   v: "Hey! Sorry we missed your call — we're out on a job right now. We'd love to help. What can we do for you?" },
+    { t: 'time',  v: '11:43 AM' },
+    { t: 'typing' },
+    { t: 'them',  v: 'Hi, need someone to look at my furnace ASAP' },
+    { t: 'you',   v: 'Absolutely! Here\'s a link to book a time that works for you: <span class="link">savant.ai/book</span>' },
+    { t: 'time',  v: '11:44 AM' },
+    { t: 'them',  v: 'Booked for tomorrow at 9am 👍' }
+  ];
+
+  function delay(ms){ return new Promise(r => setTimeout(r, ms)) }
+
+  async function playChat(){
+    chat.innerHTML = '';
+    for(const step of script){
+      if(step.t === 'time'){
+        const el = document.createElement('div');
+        el.className = 'timestamp';
+        el.textContent = step.v;
+        chat.appendChild(el);
+        await delay(300);
+      } else if(step.t === 'miss'){
+        const el = document.createElement('div');
+        el.className = 'missed';
+        el.innerHTML = '<span aria-hidden="true">⊘</span>' + step.v;
+        chat.appendChild(el);
+        await delay(700);
+      } else if(step.t === 'typing'){
+        const el = document.createElement('div');
+        el.className = 'typing';
+        el.innerHTML = '<span></span><span></span><span></span>';
+        chat.appendChild(el);
+        await delay(900);
+        el.remove();
+      } else if(step.t === 'you' || step.t === 'them'){
+        const el = document.createElement('div');
+        el.className = 'bubble ' + step.t;
+        el.innerHTML = step.v;
+        if(step.muted){ el.style.opacity = '.55'; el.style.fontStyle='italic' }
+        chat.appendChild(el);
+        await delay(900);
+      }
+    }
+  }
+
+  // Replay button
+  document.getElementById('replayBtn').addEventListener('click', () => playChat());
+
+  // Auto-play once visible
+  const phoneObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        playChat();
+        phoneObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  phoneObserver.observe(document.querySelector('.phone'));
+</script>
+</body>
 </html>
